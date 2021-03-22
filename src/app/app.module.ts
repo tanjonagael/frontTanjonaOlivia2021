@@ -14,7 +14,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-
+import {MatSelectModule} from '@angular/material/select';
 
 import { AssignmentsComponent } from './assignments/assignments.component';
 import { RenduDirective } from './shared/rendu.directive';
@@ -27,6 +27,8 @@ import { EditAssigmentComponent } from './assignments/edit-assigment/edit-assigm
 import { AuthGuard } from './shared/auth.guard';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
+import { UsersComponent } from './users/users.component';
+
 
 const routes:Routes = [
   /*{
@@ -74,7 +76,8 @@ const routes:Routes = [
     AssignmentDetailComponent,
     AddAssignmentComponent,
     EditAssigmentComponent,
-    LoginComponent
+    LoginComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
@@ -84,7 +87,8 @@ const routes:Routes = [
     MatFormFieldModule, MatInputModule, MatDatepickerModule,
     MatNativeDateModule, MatListModule, MatCardModule, MatCheckboxModule,
     MatSlideToggleModule,
-    RouterModule.forRoot(routes), HttpClientModule
+    RouterModule.forRoot(routes), HttpClientModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

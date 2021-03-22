@@ -18,7 +18,7 @@ export class AppComponent {
     // si je suis pas loggé, je me loggue, sinon, si je suis
     // loggé je me déloggue et j'affiche la page d'accueil
 
-    if(this.authService.loggedIn) {
+   /* if(this.authService.loggedIn) {
       // je suis loggé
       // et bien on se déloggue
       this.authService.logOut();
@@ -30,7 +30,7 @@ export class AppComponent {
       this.authService.logIn("admin", "toto")
       this.router.navigate(["/home"]);
       console.log("connécté")
-    }
+    }*/
   }
 
   peuplerBD() {

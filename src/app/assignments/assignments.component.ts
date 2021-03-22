@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentsService } from '../shared/assignments.service';
+import { AuthService } from '../shared/auth.service';
 import { Assignment } from './assignment.model';
 
 @Component({
@@ -18,11 +19,12 @@ export class AssignmentsComponent implements OnInit {
   prevPage: number;
   hasNextPage: boolean;
   nextPage: number;
+  userConnecte: String;
 
   // on injecte le service de gestion des assignments
   constructor(private assignmentsService:AssignmentsService,
               private route:ActivatedRoute,
-              private router:Router) {}
+              private router:Router, private auth : AuthService) {}
 
   ngOnInit() {
     console.log('AVANT AFFICHAGE');
@@ -35,6 +37,7 @@ export class AssignmentsComponent implements OnInit {
       this.getAssignments();
     });
       console.log("getAssignments() du service appelé");
+      this.userConnecte = this.auth.userConnecte;
   }
 
   getAssignments() {
