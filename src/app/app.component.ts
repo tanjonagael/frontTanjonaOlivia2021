@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from './shared/auth.service';
 import { AssignmentsService } from './shared/assignments.service';
+import { AuthService } from './shared/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +11,8 @@ import { AssignmentsService } from './shared/assignments.service';
 export class AppComponent {
   title = 'Application de gestion des assignments';
 
-  constructor(private authService:AuthService, private router:Router, private assignmentsService: AssignmentsService) {}
+  constructor(private authService:AuthService, private router:Router,
+              private assignmentsService:AssignmentsService) {}
 
   login() {
     // si je suis pas loggé, je me loggue, sinon, si je suis
@@ -22,21 +23,25 @@ export class AppComponent {
       // et bien on se déloggue
       this.authService.logOut();
       // on navigue vers la page d'accueil
-      this.router.navigate(["/home"]);
+      this.router.navigate(["/login"]);
+      console.log("deconnécté")
     } else {
       // je ne suis pas loggé, je me loggue
-      this.authService.logIn("admin", "toto");
+      this.authService.logIn("admin", "toto")
+      this.router.navigate(["/home"]);
+      console.log("connécté")
     }
   }
-  peupleBD(){
-    //this.assignmentsService.peuple_BD();
-    this.assignmentsService.peuplerBDAvecForkJoin()
-     .subscribe(() => {
-       console.log("LA BD A ETE PEUPLEE, TOUS LES ASSIGNMENTS AJOUTES,ON RE-AFFICHE LA LISTE");
-	// replaceUrl = true = force le refresh, même si
-	// on est déjà sur la page d’accueil
-       this.router.navigate(["/home"], {replaceUrl:true});
-     })
- }
 
+  peuplerBD() {
+    // version naive et simple
+    //this.assignmentsService.peuplerBD();
+
+    // meilleure version :
+    this.assignmentsService.peuplerBDAvecForkJoin()
+      .subscribe(() => {
+        console.log("LA BD A ETE PEUPLEE, TOUS LES ASSIGNMENTS AJOUTES, ON RE-AFFICHE LA LISTE");
+        this.router.navigate(["/home"], {replaceUrl:true});
+      })
+  }
 }

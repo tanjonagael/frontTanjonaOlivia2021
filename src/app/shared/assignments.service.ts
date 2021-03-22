@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { forkJoin, Observable, of } from 'rxjs';
 import { catchError, filter, map, tap } from 'rxjs/operators';
 import { Assignment } from '../assignments/assignment.model';
 import { LoggingService } from './logging.service';
-import {dataAssignment} from './data';
-import { forkJoin } from 'rxjs/internal/observable/forkJoin';
+import { assignmentsGeneres } from './data';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,19 +14,18 @@ export class AssignmentsService {
 
   constructor(private loggingService:LoggingService, private http:HttpClient) { }
 
-  //uri = "http://localhost:8010/api/assignments";
-  uri = "https://backtanjonaolivia2021.herokuapp.com/api/assignments";
+  uri = "http://localhost:8010/api/assignments";
+  //uri = "https://backmadagascar2021.herokuapp.com/api/assignments"
 
   getAssignments():Observable<Assignment[]> {
     console.log("Dans le service de gestion des assignments...")
     //return of(this.assignments);
     return this.http.get<Assignment[]>(this.uri);
   }
-//get pagination
+
   getAssignmentsPagine(page:number, limit:number):Observable<any> {
     return this.http.get<Assignment[]>(this.uri+"?page="+page + "&limit="+limit);
   }
-
 
   // Pour votre culture, on peut aussi utiliser httpClient avec une promesse
   // et then, async, await etc. Mais ce n'est pas la norme chez les developpeurs
@@ -76,7 +75,7 @@ export class AssignmentsService {
 
   addAssignment(assignment:Assignment):Observable<any> {
     assignment.id = this.generateId();
-    this.loggingService.log(assignment.nom, " a été ajouté");
+    //this.loggingService.log(assignment.nom, " a été ajouté");
 
     /*this.assignments.push(assignment);
 
@@ -111,34 +110,37 @@ export class AssignmentsService {
     return this.http.delete(this.uri + "/" + assignment._id);
 
   }
+
+  peuplerBD() {
+    assignmentsGeneres.forEach(a => {
+      let nouvelAssignment = new Assignment();
+      nouvelAssignment.nom = a.nom;
+      nouvelAssignment.id = a.id;
+      nouvelAssignment.dateDeRendu = new Date(a.dateDeRendu);
+      nouvelAssignment.rendu = a.rendu;
+
+      this.addAssignment(nouvelAssignment)
+      .subscribe(reponse => {
+        console.log(reponse.message);
+      })
+    })
+  }
+
+  // autre version qui permet de récupérer un subscribe une fois que tous les inserts
+  // ont été effectués
   peuplerBDAvecForkJoin(): Observable<any> {
     const appelsVersAddAssignment = [];
- 
-    dataAssignment.forEach((a) => {
+
+    assignmentsGeneres.forEach((a) => {
       const nouvelAssignment = new Assignment();
- 
+
       nouvelAssignment.id = a.id;
       nouvelAssignment.nom = a.nom;
       nouvelAssignment.dateDeRendu = new Date(a.dateDeRendu);
-      nouvelAssignment.rendu = false;
- 
+      nouvelAssignment.rendu = a.rendu;
+
       appelsVersAddAssignment.push(this.addAssignment(nouvelAssignment));
     });
     return forkJoin(appelsVersAddAssignment); // renvoie un seul Observable pour dire que c'est fini
   }
- 
-  peuple_BD(){
-     dataAssignment.forEach(a => {
-       let nouvAssigment = new Assignment();
-       nouvAssigment.id = a.id;
-       nouvAssigment.nom = a.nom;
-       nouvAssigment.dateDeRendu = new Date(a.dateDeRendu);
-       nouvAssigment.rendu = a.rendu;
-
-       this.addAssignment(nouvAssigment).subscribe(response =>{
-         console.log(response);
-       })
-     })
-  }
-
 }

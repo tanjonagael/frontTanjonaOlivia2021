@@ -26,18 +26,30 @@ import { Routes, RouterModule } from '@angular/router';
 import { EditAssigmentComponent } from './assignments/edit-assigment/edit-assigment.component';
 import { AuthGuard } from './shared/auth.guard';
 import { HttpClientModule } from '@angular/common/http';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { LoginComponent } from './login/login.component';
+
 const routes:Routes = [
-  {
+  /*{
     // indique que http://localhost:4200 sans rien ou avec un "/" à la fin
     // doit afficher le composant AssignmentsComponent (celui qui affiche la liste)
     path:"",
     component:AssignmentsComponent
+  },*/
+  {
+    // indique que http://localhost:4200 sans rien ou avec un "/" à la fin
+    // doit afficher le composant AssignmentsComponent (celui qui affiche la liste)
+    path:"",
+    component:LoginComponent,
   },
   {
     // idem avec  http://localhost:4200/home
     path:"home",
     component:AssignmentsComponent
+  },
+  {
+    // idem avec  http://localhost:4200/login
+    path:"login",
+    component:LoginComponent
   },
   {
     path:"add",
@@ -61,7 +73,8 @@ const routes:Routes = [
     NonRenduDirective,
     AssignmentDetailComponent,
     AddAssignmentComponent,
-    EditAssigmentComponent
+    EditAssigmentComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -71,8 +84,7 @@ const routes:Routes = [
     MatFormFieldModule, MatInputModule, MatDatepickerModule,
     MatNativeDateModule, MatListModule, MatCardModule, MatCheckboxModule,
     MatSlideToggleModule,
-    RouterModule.forRoot(routes), HttpClientModule,
-    MatPaginatorModule
+    RouterModule.forRoot(routes), HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
