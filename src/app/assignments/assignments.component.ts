@@ -27,17 +27,22 @@ export class AssignmentsComponent implements OnInit {
               private router:Router, private auth : AuthService) {}
 
   ngOnInit() {
-    console.log('AVANT AFFICHAGE');
+    console.log(this.auth.isExpiredToken);
+    if(this.auth.isExpiredToken || this.auth.loggedIn == null) {
+      this.auth.logOut();
+    }
+      
     // on regarde s'il y a page= et limit = dans l'URL
     this.route.queryParams.subscribe(queryParams => {
-      console.log("Dans le subscribe des queryParams")
+     // console.log("Dans le subscribe des queryParams")
       this.page = +queryParams.page || 1;
       this.limit = +queryParams.limit || 10;
 
       this.getAssignments();
     });
-      console.log("getAssignments() du service appelé");
-      this.userConnecte = this.auth.userConnecte;
+     // console.log("getAssignments() du service appelé");
+      //this.userConnecte = this.auth.userConnecte;
+      this.userConnecte = localStorage.getItem("fullname");
   }
 
   getAssignments() {

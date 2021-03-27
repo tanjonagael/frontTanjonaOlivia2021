@@ -1,59 +1,121 @@
 <title>{{title}}</title>
-<div class="row">
+<div class="row" id="row-login">
     <div class="col-md-6 mx-auto p-0">
-        
         <div class="card">
             <h2 class="titre">Assignments App</h2>
             <div class="login-box">
                 <div class="login-snip"> 
-                    <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Login</label> 
+                    <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label> 
                     <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
                     <div class="login-space">
                         <div class="login">
-                            <form ngForm #formAssignment class="form" (submit)="login()" method="post">
+                            <div>
+                                <img src="../assets/img/login.png" alt="image" class="img_login">
+                            </div>
+                            <form  [formGroup]="loginForm" class="form" (submit)="authentification()" method="post">
                                 <div class="group">
                                     <label for="user" class="label">Username</label>
-                                    <input id="user" name ="username"  type="text" class="input" placeholder="Enter your username" [(ngModel)]="username"> 
+                                    <input id="user" formControlName="username" name="Username" type="text" class="input" placeholder="Enter your username"> 
+                                    <div class="error_login"
+                                       *ngIf="loginForm.get('username').dirty && loginForm.get('username').touched && loginForm.controls.username.errors?.required">Username
+                                        required
+                                    </div>
                                 </div>
+                                
                                 <div class="group"> 
                                     <label for="pass" class="label">Password</label> 
-                                    <input id="pass" name ="password" type="password" class="input" data-type="password" placeholder="Enter your password" [(ngModel)]="password"> 
+                                    <input id="pass" name ="Password" formControlName="password" type="password" class="input" data-type="password" placeholder="Enter your password"> 
+                                   
+                                    <div class="error_login"
+                                       *ngIf="loginForm.get('username').dirty && loginForm.get('password').touched && loginForm.controls.password.errors?.required">Password
+                                        required
+                                    </div>
+                                    <div class="error_login"
+                                       *ngIf="loginForm.get('username').dirty && loginForm.get('password').touched && loginForm.controls.password.errors?.minlength">Password must be at least {{minLength}} characters
+                                    </div>
                                 </div>
                                 <div class="group">  
-                                    <button mat-stroked-button color="primary" class="button" id="button-sign-in">
+                                    <button mat-stroked-button color="primary" class="button" id="button-sign-in" [disabled]="!loginForm.valid">
                                         Sign In
                                       </button>
                                 </div>
                             </form>
                             <div class="hr"></div>
+                           
                             <div *ngIf="invalid_login">
                                 <div class="group">
-                                    <h5 class="error_login">Username or password invalid</h5>
+                                    <h5 class="error_login2"> <i class="fa fa-times"></i>Username or password invalid</h5>
                                 </div>
                             </div>
                             
                         </div>
+
                         <div class="sign-up-form">
-                            <div class="group"> <label for="user" class="label">Username</label> <input id="user" type="text" class="input" placeholder="Create your Username"> </div>
-                            <div class="group"> <label for="pass" class="label">Password</label> <input id="pass" type="password" class="input" data-type="password" placeholder="Create your password"> </div>
-                            <div class="group"> <label for="pass" class="label">Repeat Password</label> <input id="pass" type="password" class="input" data-type="password" placeholder="Repeat your password"> </div>
-                            <div class="group"> <label for="username" class="label">Fullname</label> <input id="full" type="text" class="input" placeholder="Create your Fullname"> </div>
-                            <div class="group">
-                                <label for="role" class="label">Role</label>
-                                <select name="role" id="full" class="input">
-                                    <option *ngFor="let role of listRoles" [value]="role.id">
-                                      {{role.role_name}}
-                                    </option>
-                                </select>
+                            <form  [formGroup]="signUpForm" class="form" (submit)="register()" method="post">
+                                <div class="group"> 
+                                    <label for="username" class="label">Username <span class='required-indicator'>*</span></label>
+                                    <input id="username" formControlName="usernameUp"  type="text" class="input" placeholder="Create your Username"> 
+                                    <div class="error_login"
+                                        *ngIf="signUpForm.get('usernameUp').dirty && signUpForm.get('usernameUp').touched && signUpForm.controls.usernameUp.errors?.required">Username
+                                        required
+                                    </div>
+                                </div>
+                                <div class="group"> 
+                                    <label for="pass" class="label">Password <span class='required-indicator'>*</span></label> 
+                                    <input id="pass" formControlName = "passwordUp" type="password" class="input" data-type="password" placeholder="Create your password"> 
+                                    <div class="error_login"
+                                        *ngIf="signUpForm.get('passwordUp').dirty && signUpForm.get('passwordUp').touched && signUpForm.controls.passwordUp.errors?.required">Password
+                                        required
+                                    </div>
+                                    <div class="error_login"
+                                        *ngIf="signUpForm.get('passwordUp').dirty && signUpForm.get('passwordUp').touched && signUpForm.controls.passwordUp.errors?.minlength">Password must be at least {{minLength}} characters
+                                    </div>
+                                </div>
+                                <div class="group"> 
+                                    <label for="pass" class="label">Repeat Password <span class='required-indicator'>*</span></label> 
+                                    <input id="pass"  formControlName = "repassword" type="password" class="input" data-type="password" placeholder="Repeat your password"> 
+                                    <div class="error_login"
+                                        *ngIf="signUpForm.get('repassword').dirty && signUpForm.get('repassword').touched && signUpForm.controls.repassword.errors?.required">Confirmation password required
+                                    </div>
+                                    <div class="error_login"
+                                        *ngIf="signUpForm.get('repassword').dirty && signUpForm.get('repassword').touched && signUpForm.controls.repassword.hasError('notSame')">Confirmation password invalid
+                                    </div>
+                                </div>
+                                <div class="group"> 
+                                    <label for="username" class="label">Fullname <span class='required-indicator'>*</span></label> 
+                                    <input id="full"formControlName = "fullname" type="text" class="input" placeholder="Create your Fullname"> 
+                                    <div class="error_login"
+                                        *ngIf="signUpForm.get('fullname').dirty && signUpForm.get('fullname').touched && signUpForm.controls.fullname.errors?.required">Fullname
+                                        required
+                                    </div>
+                                    <div class="error_login"
+                                    *ngIf="signUpForm.get('fullname').dirty && signUpForm.get('fullname').touched && signUpForm.controls.fullname.errors?.maxlength">Fullname :maximum characters are {{maxLength}}.
+                                </div>
+                                </div>
+                                <div class="group">
+                                    <label for="role" class="label">Role <span class='required-indicator'>*</span></label>
+                                    <select formControlName="role" name="role" class="select_roles">
+                                        <option *ngFor="let role of listRoles" [value]="role.id" class="select_roles">
+                                            {{role.role_name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="group">
+                                    <button mat-stroked-button color="primary" class="button" id="button-sign-in" [disabled]="!signUpForm.valid">
+                                        Sign Up
+                                    </button>
+                                </div>
+                            </form>
+                            <div *ngIf="invalid_register">
+                                <div class="group">
+                                    <h5 class="error_login2"><i class="fa fa-times"></i> {{invalid_register_msg}}</h5>
+                                </div>
                             </div>
-                            
-                            <div class="group">
-                                <button mat-stroked-button color="primary" class="button" id="button-sign-in">
-                                    Sign Up
-                                </button>
+                            <div *ngIf="valid_register">
+                                <div class="group">
+                                    <h5 class="valid_register"><i class="fa fa-check" aria-hidden="true"></i> {{valid_register_msg}} </h5>
+                                </div>
                             </div>
-                            <div class="hr"></div>
-                            
                         </div>
                     </div>
                 </div>
