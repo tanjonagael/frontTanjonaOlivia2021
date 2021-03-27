@@ -18,9 +18,9 @@ export class AuthService {
   /*uriSignIn = "http://localhost:8010/api/user/signIn";
   uriSignUp = "http://localhost:8010/api/user/signUp";
   uriRoles = "http://localhost:8010/api/roles";*/
-  uriSignIn = "https://backmadagascar2021.herokuapp.com/api/user/signIn";
-  uriSignUp = "https://backmadagascar2021.herokuapp.com/api/user/signUp";
-  uriRoles = "https://backmadagascar2021.herokuapp.com/api/roles";
+  uriSignIn = "https://backtanjonaolivia2021.herokuapp.com/api/user/signIn";
+  uriSignUp = "https://backtanjonaolivia2021.herokuapp.com/api/user/signUp";
+  uriRoles = "https://backtanjonaolivia2021.herokuapp.com/api/roles";
 
   //appel api
   logIn(user: User): Observable<any> {
