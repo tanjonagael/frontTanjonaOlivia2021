@@ -1,3 +1,5 @@
+import {Matieres } from './matieres.model';
+
 export class Assignment {
   _id?:string;
   id:number;
@@ -7,4 +9,5 @@ export class Assignment {
   idMatiere:number;
   note:number;
   remarque:string;
+  matiere: Matieres
 }

@@ -501,3 +501,11 @@ export const assignmentsGeneres = [
   { "id" : 499, "nom": "Mycat", "dateDeRendu" : "11/18/2020", "rendu"  : true, "idMatiere":1 ,"note"  : 12 ,"remarque"  : "Bien" },
   { "id" : 500, "nom": "Roodel", "dateDeRendu" : "7/25/2020", "rendu"  : true, "idMatiere":1 ,"note"  : 12 ,"remarque"  : "Bien" },
 ];
+
+
+/*{ "id": 1, "matiere": "Web", "imageMatiere" : "web.jpg", "imageProf"  : "prof_web.jpg"},
+{ "id": 2, "matiere": "NFC", "imageMatiere" : "nfc.jpg", "imageProf"  : "prof_nfc.jpg"},
+{ "id": 3, "matiere": "ANDROID", "imageMatiere" : "android.jpg", "imageProf"  : "prof_android.jpg"},
+{ "id": 4, "matiere": "GRAILS", "imageMatiere" : "grails.jpg", "imageProf"  : "prof_grails.jpg"},
+{ "id": 5, "matiere": "MATHS", "imageMatiere" : "math.jpg", "imageProf"  : "prof_math.jpg"},
+{ "id": 6, "matiere": "NOSQL", "imageMatiere" : "nosql.jpg", "imageProf"  : "prof_nosql.jpg"}*/

@@ -1,4 +1,4 @@
-export class Matiere {
+export class Matieres {
   _id?:string;
   id:number;
   matiere:string;

@@ -38,6 +38,7 @@ export class AssignmentsRenduComponent implements OnInit {
         this.limit = +queryParams.limit || 20;
     });
     this.getAssignmentsRendu();
+   
     }
 
     getAssignmentsRendu() {

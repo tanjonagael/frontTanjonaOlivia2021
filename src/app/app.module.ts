@@ -53,31 +53,7 @@ const routes:Routes = [
       path: 'non_rendu',
       component: AssignmentsNonRenduComponent
     }
-  ]}
-  /*{
-    // indique que http://localhost:4200 sans rien ou avec un "/" à la fin
-    // doit afficher le composant AssignmentsComponent (celui qui affiche la liste)
-    path:"",
-    component:AssignmentsComponent
-  },
-  {
-    // indique que http://localhost:4200 sans rien ou avec un "/" à la fin
-    // doit afficher le composant AssignmentsComponent (celui qui affiche la liste)
-    path:"",
-    component:AssignmentsComponent,
-  },
-
-  
-  {
-    // idem avec  http://localhost:4200/home
-    path:"home",
-    component:AssignmentsComponent
-  },
-  /*{
-    path: 'home',
-    loadChildren: () => import('./assignments/assignments.module')
-      .then(mod => mod.AssignmentsModule)
-  },
+  ]},
   {
     // idem avec  http://localhost:4200/login
     path:"login",
@@ -96,13 +72,7 @@ const routes:Routes = [
     component:EditAssigmentComponent,
     canActivate : [AuthGuard]
   }
-  /*{
-    path: 'home/add',
-    loadChildren: () =>
-      import('./assignments/assignments-one/assignments-one.module').then(
-        (m) => m.AssignmentsOneModule
-      ),
-  },*/
+  
 ]
 @NgModule({
   declarations: [
