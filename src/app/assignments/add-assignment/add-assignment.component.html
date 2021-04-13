@@ -1,33 +1,32 @@
 <main class="container">
   <h1>Nouveau assignment</h1>
   <mat-divider></mat-divider>
-  <form ngForm #formAssignment class="form" (submit)="onSubmit($event); formAssignment.reset();">
-    <input class="inputfield" type="text" placeholder="Nom des élèves" required [(ngModel)]="nom" name="nom"/>
-    <br>
-    <mat-form-field appearance="fill" class="field">
-      <mat-label>Choisissez une date</mat-label>
-      <input matInput [matDatepicker]="picker" required [(ngModel)]="dateDeRendu" name="dateDeRendu">
+  <form class="text-center border border-light p-5" (submit)="onSubmit($event)" [formGroup]="assignmentForm">
 
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <!-- Name -->
+    <input type="text" formControlName="nom" name="nom" class="form-control mb-4" placeholder="Nom des élèves (*)">
+    <div class="form-row mb-4">
+      <div class="col">
+        <label>Choisissez un matiere <span>(*)</span></label>
+        <select class="browser-default custom-select mb-4" formControlName="idMatiere" name="idMatiere">
+          <option *ngFor="let role of listMatiere" [value]="role.id" class="select_roles">
+            {{role.matiere}}
+          </option>
+        </select>
+      </div>
+      <div class="col">
+        <label> Date du rendu </label>
+        <input type="date" formControlName="dateDeRendu" name="dateDeRendu" class="form-control mb-4" placeholder="Nom des élèves">
+      </div>
+    </div>
+    <!-- Email -->
+    <input type="number" formControlName="note" name="note" class="form-control mb-4" placeholder="note">
 
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-    <br>
-    <mat-form-field appearance="fill" class="field">
-      <mat-label>Choisissez un matière</mat-label>
-      <select matNativeControl required [(ngModel)]="idMatiere" name="idMatiere">
-        <option value="volvo">Volvo</option>
-        <option value="saab">Saab</option>
-        <option value="mercedes">Mercedes</option>
-        <option value="audi">Audi</option>
-      </select>
-    </mat-form-field>
-    <input class="inputfield" type="number" min="0" max="20" required placeholder="note" [(ngModel)]="note" name="note" >
-
-    <mat-form-field class="field">
-      <mat-label>Remarque</mat-label>
-      <textarea matInput [(ngModel)]="remarque" name="remarque"></textarea>
-    </mat-form-field>
+    <div class="form-group">
+      <textarea class="form-control rounded-0" formControlName="remarque" name="remarque" rows="3" placeholder="Remarque"></textarea>
+    </div>
+  
     <button mat-raised-button color="primary" class="btn">Enregistrer</button>
+  
   </form>
 </main>
