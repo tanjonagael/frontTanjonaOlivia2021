@@ -1,18 +1,33 @@
-<form ngForm #formAssignment class="form" (submit)="onSubmit($event); formAssignment.reset();">
-  <mat-form-field>
-    <input matInput placeholder="Nom du devoir" required [(ngModel)]="nom" name="nom">
-  </mat-form-field>
+<main class="container">
+  <h1>Nouveau assignment</h1>
+  <mat-divider></mat-divider>
+  <form ngForm #formAssignment class="form" (submit)="onSubmit($event); formAssignment.reset();">
+    <input class="inputfield" type="text" placeholder="Nom des élèves" required [(ngModel)]="nom" name="nom"/>
+    <br>
+    <mat-form-field appearance="fill" class="field">
+      <mat-label>Choisissez une date</mat-label>
+      <input matInput [matDatepicker]="picker" required [(ngModel)]="dateDeRendu" name="dateDeRendu">
 
-  <mat-form-field appearance="fill">
-    <mat-label>Choisissez une date</mat-label>
-    <input matInput [matDatepicker]="picker" required [(ngModel)]="dateDeRendu" name="date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
 
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" class="field">
+      <mat-label>Choisissez un matière</mat-label>
+      <select matNativeControl required [(ngModel)]="idMatiere" name="idMatiere">
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="mercedes">Mercedes</option>
+        <option value="audi">Audi</option>
+      </select>
+    </mat-form-field>
+    <input class="inputfield" type="number" min="0" max="20" required placeholder="note" [(ngModel)]="note" name="note" >
 
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-
-  <button mat-stroked-button color="primary">
-    Ajouter un devoir
-  </button>
-</form>
+    <mat-form-field class="field">
+      <mat-label>Remarque</mat-label>
+      <textarea matInput [(ngModel)]="remarque" name="remarque"></textarea>
+    </mat-form-field>
+    <button mat-raised-button color="primary" class="btn">Enregistrer</button>
+  </form>
+</main>

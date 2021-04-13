@@ -12,8 +12,11 @@ export class EditAssigmentComponent implements OnInit {
   assignment:Assignment;
 
   // pour le formulaire
-  nom = "";
+  nom = '';
   dateDeRendu = null;
+  note = null;
+  idMatiere = null;
+  remarque = '';
 
   constructor(
     private assignmentsService: AssignmentsService,

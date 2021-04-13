@@ -1,5 +1,23 @@
-.form {
-  display:flex;
+.container {
+  display: flex;
   flex-direction: column;
-  margin:5px;
+  border-style: ridge;
+}
+.field {
+  width: 70rem;
+}
+
+
+.inputfield {
+  padding: 0.5rem;
+  margin: auto;
+  margin-top: 0.5rem;
+  width: 70rem;
+  display: block;
+  border-radius: 0.5rem;
+  outline: none;
+  border: 1px solid #bdbdbb;
+}
+.btn {
+  margin-bottom: 2%;
 }

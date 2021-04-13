@@ -12,6 +12,9 @@ export class AddAssignmentComponent implements OnInit {
   // Pour les champs du formulaire
   nom = '';
   dateDeRendu = null;
+  note = null;
+  idMatiere = null;
+  remarque = '';
 
   constructor(private assignmentsService:AssignmentsService,
               private router:Router) {}
