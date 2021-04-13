@@ -1,0 +1,40 @@
+:host /deep/ .ngx-pagination {
+    padding-left: 0px;
+  }
+  
+  :host /deep/.ngx-pagination .current,
+  .btn-info {
+    background: darkslategrey !important;
+    border-radius: 5px;
+    font-family: 'Roboto';
+  }
+  
+  :host /deep/.ngx-pagination .current:hover {
+    border: 1px solid darkslategrey;
+    background:#6B7F7F !important;
+    border-radius: 5px;
+  }
+
+  :host /deep/.ngx-pagination a:hover, .ngx-pagination button:hover {
+    background: #e6e6e6;
+    border-radius: 5px;
+    border: solid 1px  darkslategrey;
+  }
+  :host /deep/ a:not([href]) {
+    color: inherit;
+    text-decoration: none;
+    font-family: 'Roboto';
+}
+.pagination{
+    margin-top: 10px;
+}
+
+:host /deep/.ngx-pagination .pagination-previous a::before,
+:host /deep/.ngx-pagination .pagination-previous.disabled::before,
+:host /deep/.ngx-pagination .pagination-next a::after,
+:host /deep/.ngx-pagination .pagination-next.disabled::after { 
+  content: '' !important; 
+}
+.result{
+  margin-top: auto;
+}

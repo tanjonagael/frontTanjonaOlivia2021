@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentsService } from '../shared/assignments.service';
 import { AuthService } from '../shared/auth.service';
-import { Assignment } from './assignment.model';
+import { TabItem } from '../shared/tabItems';
+import { Assignment } from '../shared/assignment.model';
 
 @Component({
   selector: 'app-assignments',
@@ -10,104 +11,61 @@ import { Assignment } from './assignment.model';
   styleUrls: ['./assignments.component.css'],
 })
 export class AssignmentsComponent implements OnInit {
-  assignments:Assignment[];
-  page: number=1;
-  limit: number=10;
-  totalDocs: number;
-  totalPages: number;
-  hasPrevPage: boolean;
-  prevPage: number;
-  hasNextPage: boolean;
-  nextPage: number;
+  
+  tabs:TabItem[];
   userConnecte: String;
-
+  activeLink  = "rendu";
+  routeLinks: any[];
+    activeLinkIndex = -1;
   // on injecte le service de gestion des assignments
   constructor(private assignmentsService:AssignmentsService,
               private route:ActivatedRoute,
               private router:Router, private auth : AuthService) {}
 
   ngOnInit() {
-    console.log(this.auth.isExpiredToken);
-    if(this.auth.isExpiredToken || this.auth.loggedIn == null) {
+    
+   // console.log(this.auth.isExpiredToken);
+    /*if(this.auth.isExpiredToken || this.auth.loggedIn == null) {
       this.auth.logOut();
-    }
+    }*/
       
-    // on regarde s'il y a page= et limit = dans l'URL
-    this.route.queryParams.subscribe(queryParams => {
-     // console.log("Dans le subscribe des queryParams")
-      this.page = +queryParams.page || 1;
-      this.limit = +queryParams.limit || 10;
-
-      this.getAssignments();
-    });
+   this.tabs = [
+    {
+      label: 'Rendu',
+      icon: 'done_outline',
+      route: 'rendu',
+    },
+    {
+      label: 'Non rendu',
+      icon: 'close',
+      route: 'non_rendu',
+    }
+  ];
+  this.routeLinks = [
+    {
+        label: 'Product 1',
+        link: './rendu',
+        index: 0
+    }, {
+        label: 'Product 2',
+        link: './non_rendu',
+        index: 1
+    }
+  ];
      // console.log("getAssignments() du service appelé");
       //this.userConnecte = this.auth.userConnecte;
       this.userConnecte = localStorage.getItem("fullname");
-  }
-
-  getAssignments() {
-    this.assignmentsService.getAssignmentsPagine(this.page, this.limit)
-    .subscribe(data => {
-      this.assignments = data.docs;
-      this.page = data.page;
-      this.limit = data.limit;
-      this.totalDocs = data.totalDocs;
-      this.totalPages = data.totalPages;
-      this.hasPrevPage = data.hasPrevPage;
-      this.prevPage = data.prevPage;
-      this.hasNextPage = data.hasNextPage;
-      this.nextPage = data.nextPage;
-      console.log("données reçues");
+      this.router.events.subscribe((res) => {
+        this.activeLinkIndex = this.routeLinks.indexOf(this.routeLinks.find(tab => tab.link === '.' + this.router.url));
     });
   }
+  getActiveClass(indexOfRouteLink) {
+    let tabsclass = 'mat-tab-link';
+    if (this.activeLinkIndex === indexOfRouteLink) {
+      tabsclass = 'mat-tab-link mat-tab-label-active';
+    }
 
-  onDeleteAssignment(event) {
-    // event = l'assignment à supprimer
-
-    //this.assignments.splice(index, 1);
-    this.assignmentsService.deleteAssignment(event)
-      .subscribe(message => {
-        console.log(message);
-      })
-  }
-
-  premierePage() {
-    this.router.navigate(['/home'], {
-      queryParams: {
-        page:1,
-        limit:this.limit,
-      }
-    });
-  }
-
-  pageSuivante() {
-    /*
-    this.page = this.nextPage;
-    this.getAssignments();*/
-    this.router.navigate(['/home'], {
-      queryParams: {
-        page:this.nextPage,
-        limit:this.limit,
-      }
-    });
-  }
-
-
-  pagePrecedente() {
-    this.router.navigate(['/home'], {
-      queryParams: {
-        page:this.prevPage,
-        limit:this.limit,
-      }
-    });
-  }
-
-  dernierePage() {
-    this.router.navigate(['/home'], {
-      queryParams: {
-        page:this.totalPages,
-        limit:this.limit,
-      }
-    });
+    return tabsclass;
   }
 }
+

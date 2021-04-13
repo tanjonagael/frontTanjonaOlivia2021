@@ -27,25 +27,56 @@ import { EditAssigmentComponent } from './assignments/edit-assigment/edit-assigm
 import { AuthGuard } from './shared/auth.guard';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
-import { UsersComponent } from './users/users.component';
 import { JwtModule } from '@auth0/angular-jwt';
+import { MenuComponent } from './menu/menu.component';
+import {MatToolbarModule} from '@angular/material/toolbar'; 
+import { MatMenuModule} from '@angular/material/menu';
+import {MatTabsModule} from '@angular/material/tabs';
+import { AssignmentsRenduComponent } from './assignments/assignments-rendu/assignments-rendu.component';
+import { AssignmentsNonRenduComponent } from './assignments/assignments-non-rendu/assignments-non-rendu.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+
+
 const routes:Routes = [
+  { path: '', component: MenuComponent },
+  { path: 'home', component: AssignmentsComponent, children: [
+    {
+      path: '',
+      component: AssignmentsRenduComponent
+    },
+    {
+      path: 'rendu',
+      component: AssignmentsRenduComponent
+    },
+
+    {
+      path: 'non_rendu',
+      component: AssignmentsNonRenduComponent
+    }
+  ]}
   /*{
     // indique que http://localhost:4200 sans rien ou avec un "/" à la fin
     // doit afficher le composant AssignmentsComponent (celui qui affiche la liste)
     path:"",
     component:AssignmentsComponent
-  },*/
+  },
   {
     // indique que http://localhost:4200 sans rien ou avec un "/" à la fin
     // doit afficher le composant AssignmentsComponent (celui qui affiche la liste)
     path:"",
     component:AssignmentsComponent,
   },
+
+  
   {
     // idem avec  http://localhost:4200/home
     path:"home",
     component:AssignmentsComponent
+  },
+  /*{
+    path: 'home',
+    loadChildren: () => import('./assignments/assignments.module')
+      .then(mod => mod.AssignmentsModule)
   },
   {
     // idem avec  http://localhost:4200/login
@@ -65,18 +96,27 @@ const routes:Routes = [
     component:EditAssigmentComponent,
     canActivate : [AuthGuard]
   }
+  /*{
+    path: 'home/add',
+    loadChildren: () =>
+      import('./assignments/assignments-one/assignments-one.module').then(
+        (m) => m.AssignmentsOneModule
+      ),
+  },*/
 ]
 @NgModule({
   declarations: [
     AppComponent,
-    AssignmentsComponent,
     RenduDirective,
     NonRenduDirective,
     AssignmentDetailComponent,
     AddAssignmentComponent,
     EditAssigmentComponent,
     LoginComponent,
-    UsersComponent
+    MenuComponent,
+    AssignmentsComponent,
+    AssignmentsRenduComponent,
+    AssignmentsNonRenduComponent
   ],
   imports: [
     BrowserModule,
@@ -87,14 +127,13 @@ const routes:Routes = [
     MatNativeDateModule, MatListModule, MatCardModule, MatCheckboxModule,
     MatSlideToggleModule,
     RouterModule.forRoot(routes), HttpClientModule,
-    MatSelectModule ,ReactiveFormsModule
-    
+    MatSelectModule ,ReactiveFormsModule, MatToolbarModule,
+    MatMenuModule,MatTabsModule,NgxPaginationModule
     /*JwtModule.forRoot({
       config: {
         tokenGetter: function  tokenGetter() {
              return     localStorage.getItem('access_token');
         }
-       
         
         allowedDomains: ["localhost:8081"],
         disallowedRoutes: ['http://localhost:8081/login']
