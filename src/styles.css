@@ -64,3 +64,9 @@ body { margin: 20px; font-family: Roboto, "Helvetica Neue", sans-serif; }
     border-radius: 2px;
     text-align: center;
   }
+
+  /*css navbar*/
+  /*@import 'assets/bootstrap/css/bootstrap-responsive.min.css';
+  @import 'assets/bootstrap/css/bootstrap.min.css';
+  @import 'assets/css/theme.css';
+  /*------------------------------------*/

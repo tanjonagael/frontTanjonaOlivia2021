@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
-import { Assignment } from '../assignment.model';
+import { Assignment } from 'src/app/shared/assignment.model';
 import { Matieres } from 'src/app/shared/matieres.model';
 import { FormGroup,AbstractControl, Validators,FormBuilder } from '@angular/forms';
 import {MatiereService} from 'src/app/shared/matieres.service'

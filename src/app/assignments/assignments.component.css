@@ -6,3 +6,62 @@
 .ajouterBtn {
   align-self: flex-end;
 }
+
+
+a{
+  text-decoration: none;
+}
+
+.mat-tab-link-active,
+.mat-tab-label-active {
+    color: blue;
+    border: 1px solid #6B7F7F;
+    border-radius: 3px;
+    font-weight: bold;
+    background: gainsboro;
+  
+}
+.mat-ink-bar {
+  visibility: hidden;
+    left: 0px;
+    width: 160px;
+}
+:host ::ng-deep .mat-ink-bar {
+  display: none !important;
+}
+
+.rendu{ 
+  color: green
+}
+.non_rendu{ 
+  color: red
+}
+
+.rendu,.non_rendu:hover{
+  border: 1px solid #6B7F7F;
+}
+.onglet{
+  border: 1px solid #6B7F7F;
+  border-radius: 3px;
+  width: auto;
+}
+
+.info{
+  text-align: center;
+  font-weight: bold;
+  margin: auto;
+  font-family: 'Roboto';
+  margin-left: 20%;
+}
+.titre_list{
+    text-align: center;
+    font-style: italic;
+    font-weight: 800;
+    color: darkslategrey;
+}
+
+.content_list{
+  border: solid 2px darkslategrey;
+    padding: 2px 2px 2px 2px;
+    border-radius: 8px;
+}

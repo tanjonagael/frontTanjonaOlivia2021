@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User } from '../users/user.model';
+import { User } from './user.model';
 import { JwtHelperService } from  '@auth0/angular-jwt';
 var helper = new JwtHelperService();
 
@@ -15,12 +15,12 @@ export class AuthService {
   admin = false;
   
   constructor(private http : HttpClient, private router: Router) {}
-  /*uriSignIn = "http://localhost:8010/api/user/signIn";
+  uriSignIn = "http://localhost:8010/api/user/signIn";
   uriSignUp = "http://localhost:8010/api/user/signUp";
-  uriRoles = "http://localhost:8010/api/roles";*/
-  uriSignIn = "https://backtanjonaolivia2021.herokuapp.com/api/user/signIn";
-  uriSignUp = "https://backtanjonaolivia2021.herokuapp.com/api/user/signUp";
-  uriRoles = "https://backtanjonaolivia2021.herokuapp.com/api/roles";
+  uriRoles = "http://localhost:8010/api/roles";
+  // uriSignIn = "https://backtanjonaolivia2021.herokuapp.com/api/user/signIn";
+  // uriSignUp = "https://backtanjonaolivia2021.herokuapp.com/api/user/signUp";
+  // uriRoles = "https://backtanjonaolivia2021.herokuapp.com/api/roles";
 
   //appel api
   logIn(user: User): Observable<any> {

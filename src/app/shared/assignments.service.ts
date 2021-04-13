@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { forkJoin, Observable, of } from 'rxjs';
 import { catchError, filter, map, tap } from 'rxjs/operators';
-import { Assignment } from '../assignments/assignment.model';
+import { Assignment } from './assignment.model';
 import { LoggingService } from './logging.service';
 import { assignmentsGeneres } from './data';
 
@@ -14,8 +14,13 @@ export class AssignmentsService {
 
   constructor(private loggingService:LoggingService, private http:HttpClient) { }
 
-  //uri = "http://localhost:8010/api/assignments";
-  uri = "https://backtanjonaolivia2021.herokuapp.com/api/assignments"
+   uri = "http://localhost:8010/api/assignments";
+  //uri = "https://backtanjonaolivia2021.herokuapp.com/api/assignments"
+   uriRendu = "http://localhost:8010/api/assignmentsRendu";
+  //uriRendu = "https://backtanjonaolivia2021.herokuapp.com/api/assignmentsRendu"
+  uriNonRendu = "http://localhost:8010/api/assignmentsNonRendu";
+  //uriNonRendu = "https://backtanjonaolivia2021.herokuapp.com/api/assignmentsNonRendu"
+
 
   getAssignments():Observable<Assignment[]> {
     console.log("Dans le service de gestion des assignments...")
@@ -23,10 +28,20 @@ export class AssignmentsService {
     return this.http.get<Assignment[]>(this.uri);
   }
 
+  //get all paginate
   getAssignmentsPagine(page:number, limit:number):Observable<any> {
     return this.http.get<Assignment[]>(this.uri+"?page="+page + "&limit="+limit);
   }
 
+  //get all paginate rendu
+  getAssignmentsRenduPagine(page:number, limit:number):Observable<any> {
+    return this.http.get<Assignment[]>(this.uriRendu+"?page="+page + "&limit="+limit);
+  }
+
+  //get all paginate non rendu
+  getAssignmentsNonRenduPagine(page:number, limit:number):Observable<any> {
+    return this.http.get<Assignment[]>(this.uriNonRendu+"?page="+page + "&limit="+limit);
+  }
   // Pour votre culture, on peut aussi utiliser httpClient avec une promesse
   // et then, async, await etc. Mais ce n'est pas la norme chez les developpeurs
   // Angular
