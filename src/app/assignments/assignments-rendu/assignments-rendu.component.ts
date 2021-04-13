@@ -57,61 +57,6 @@ export class AssignmentsRenduComponent implements OnInit {
       });
     }
 
-    /*onTableDataChange(event){
-      this.page = event;
-      this.getAssignmentsRendu();
-    } 
-    /*onDeleteAssignment(event) {
-    // event = l'assignment à supprimer
-
-    //this.assignments.splice(index, 1);
-    this.assignmentsService.deleteAssignment(event)
-    .subscribe(message => {
-    console.log(message);
-    })
-    }
-
-  premierePage() {
-    this.router.navigate(['/home'], {
-      queryParams: {
-        page:1,
-        limit:this.limit,
-      }
-    });
-  }
-
-  pageSuivante() {
-      /*
-      this.page = this.nextPage;
-      this.getAssignments();
-    this.router.navigate(['/home'], {
-      queryParams: {
-        page:this.nextPage,
-        limit:this.limit,
-      }
-    });
-  }
-
-
-  pagePrecedente() {
-      this.router.navigate(['/home'], {
-      queryParams: {
-        page:this.prevPage,
-        limit:this.limit,
-      }
-    });
-  }
-
-  dernierePage() {
-    this.router.navigate(['/home'], {
-    queryParams: {
-    page:this.totalPages,
-    limit:this.limit,
-    }
-    });
-  }*/
-   
-
   tabSize(event){
     
     this.page = event;
@@ -124,6 +69,5 @@ export class AssignmentsRenduComponent implements OnInit {
     this.page = 1;
     this.getAssignmentsRendu();
   }  
-
         
 }

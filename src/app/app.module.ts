@@ -36,7 +36,6 @@ import { AssignmentsRenduComponent } from './assignments/assignments-rendu/assig
 import { AssignmentsNonRenduComponent } from './assignments/assignments-non-rendu/assignments-non-rendu.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 
-
 const routes:Routes = [
   { path: '', component: MenuComponent },
   { path: 'home', component: AssignmentsComponent, children: [
@@ -98,7 +97,7 @@ const routes:Routes = [
     MatSlideToggleModule,
     RouterModule.forRoot(routes), HttpClientModule,
     MatSelectModule ,ReactiveFormsModule, MatToolbarModule,
-    MatMenuModule,MatTabsModule,NgxPaginationModule
+    MatMenuModule,MatTabsModule,NgxPaginationModule,MatCardModule
     /*JwtModule.forRoot({
       config: {
         tokenGetter: function  tokenGetter() {
