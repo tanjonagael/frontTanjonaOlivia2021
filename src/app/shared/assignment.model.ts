@@ -9,5 +9,6 @@ export class Assignment {
   idMatiere:number;
   note:number;
   remarque:string;
+  auteur:string;
   matiere: Matieres
 }

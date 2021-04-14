@@ -12,7 +12,7 @@ import { Assignment } from '../../shared/assignment.model';
 export class AssignmentDetailComponent implements OnInit {
   // passé sous forme d'attribut HTML
   assignmentTransmis: Assignment;
-
+  roles : Number
   constructor(
     private assignmentsService: AssignmentsService,
     private route: ActivatedRoute,
@@ -22,6 +22,7 @@ export class AssignmentDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAssignmentById();
+    this.roles = parseInt( (localStorage.getItem('roles')));
   }
 
   getAssignmentById() {

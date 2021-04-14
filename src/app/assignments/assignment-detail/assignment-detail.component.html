@@ -1,18 +1,38 @@
-<div class="container">
-  <mat-card *ngIf="assignmentTransmis">
-    <mat-card-title>{{assignmentTransmis.nom}}</mat-card-title>
-    <mat-card-subtitle>{{assignmentTransmis.dateDeRendu | date}}</mat-card-subtitle>
+<div class="container" *ngIf="assignmentTransmis">
+  
+  <h2 class ="title">Assignment : {{assignmentTransmis.nom}}</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Elève</th>
+        <th scope="col">matiere</th>
+        <th scope="col">Note</th>
+        <th scope="col">Date d rendu</th>
+        <th scope="col">Prof</th>
+        <th scope="col">Remarque</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>{{assignmentTransmis.auteur}}</th>
+        <td>{{assignmentTransmis.matiere[0].matiere}}
+          <span><img src="../assets/mat/{{assignmentTransmis.matiere[0].imageMatiere}}" alt="image_prof" class="image"></span>
+        </td>
+        <td>{{assignmentTransmis.note}} / 20</td>
+        <td>{{assignmentTransmis.dateDeRendu | date}}</td>
+        <td class="text-align-center"><img src="../assets/mat/{{assignmentTransmis.matiere[0].imageProf}}" alt="image_prof" class="image"></td>
+        <td>{{assignmentTransmis.remarque}}</td>
+      </tr>
+      
+    </tbody>
+  </table>
     <div id="bottom">
-      <mat-checkbox *ngIf="!assignmentTransmis.rendu" (click)="onAssignmentRendu()">
-        Rendu
-      </mat-checkbox>
-      <nav>
-
-          <button [disabled]="!isAdmin()" mat-stroked-button color="primary" (click)="onClickEdit()">EDIT</button>
-
+      <nav *ngIf="roles===1">
+          <button mat-stroked-button color="primary" (click)="onClickEdit()">EDIT</button>
       </nav>
-
+      <nav *ngIf="roles===2">
+        <button [disabled] mat-stroked-button color="primary" (click)="onClickEdit()">EDIT</button>
+    </nav>
       <button mat-stroked-button color="warn" (click)="onDelete()">DELETE</button>
     </div>
-  </mat-card>
 </div>

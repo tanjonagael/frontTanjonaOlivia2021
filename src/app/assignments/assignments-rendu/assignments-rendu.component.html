@@ -30,11 +30,12 @@
                 <div class="col-md-9">
                     <mat-card-header>
                         <mat-card-subtitle>
-                          <h3 mat-subheader class="subtitle">
+                          <h4 mat-subheader class="subtitle">
                             <a routerLink="/assignment/{{a.id}}" class="title">
-                              Assignment de {{a.nom}}
+                              Titre : {{a.nom}}
                             </a>
-                          </h3>
+                          </h4>
+                          <p>Auteur : {{a.auteur}}</p>
                         </mat-card-subtitle> 
                         <mat-card-title class="rendule">
                           Rendu le {{a.dateDeRendu | date}}

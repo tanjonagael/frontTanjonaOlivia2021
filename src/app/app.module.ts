@@ -37,7 +37,7 @@ import { AssignmentsNonRenduComponent } from './assignments/assignments-non-rend
 import { NgxPaginationModule } from 'ngx-pagination';
 
 const routes:Routes = [
-  { path: '', component: MenuComponent },
+  { path: '', component: LoginComponent },
   { path: 'home', component: AssignmentsComponent, children: [
     {
       path: '',
