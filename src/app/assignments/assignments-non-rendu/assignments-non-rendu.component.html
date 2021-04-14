@@ -1,1 +1,82 @@
-<p>assignments-non-rendu works!</p>
+<div class="container">
+    <div class = "content-rendu">
+      <div class="pagination">
+        <div class="d-flex justify-content-center">
+          <p class="result">Résultats par page</p>
+            <div class="p-2 bd-highlight">
+                <select (change)="tableData($event)" class="custom-select">
+                  <option *ngFor="let size of tableSizes" [ngValue]="size">
+                    {{ size }}
+                  </option>
+                </select>
+            </div>
+            <div class="pagine">
+              <pagination-controls responsive="true"  previousLabel="<"
+              nextLabel=">" (pageChange)="tabSize($event)"></pagination-controls>
+            </div>            
+        </div>
+      </div>
+    
+          <!--<nav>
+            <a routerLink="/assignment/{{a.id}}">-->
+                <div class="container">
+                    
+                        <div class="mycard">
+                            <mat-list *ngFor="let a of assignmentsRendu | paginate : {
+                                itemsPerPage: limit,
+                                currentPage: page,
+                                totalItems: count
+                              };">
+                              <div class="row">
+                                <div class="col-lg-9">
+                                    <nav>
+                                      <a routerLink="/assignment/{{a.id}}">
+                                        <h3 mat-subheader>{{a.dateDeRendu | date}}</h3>
+                                        <mat-list-item>
+                                          <p *ngIf="a.rendu; else nonsoumis" appRendu>
+                                            {{a.nom}}, rendu par l'élève.
+                                          </p>
+                                            <ng-template #nonsoumis>
+                                                <p appNonRendu>
+                                                    {{a.nom}}, non encore rendu par l'élève.
+                                                </p>
+                                                </ng-template>
+                                            <ng-template #nonsoumis>
+                                                <p appNonRendu>
+                                                    {{a.nom}}, non encore rendu par l'élève.
+                                                </p>
+                                                </ng-template>
+                                        </mat-list-item>
+                                      </a>
+                                    </nav>  
+                                </div>
+                                <div class="col col-lg-4">
+                                    <button mat-raised-button color="primary" (click)="edit(a.id)">
+                                        Edit
+                                      </button>
+                                  </div>
+                              </div>
+                              
+                            </mat-list>
+                            <mat-divider></mat-divider>
+                        </div>
+                </div>
+          <div class="pagination">
+            <div class="d-flex justify-content-center">
+              <p class="result">Résultats par page</p>
+                <div class="p-2 bd-highlight">
+                    <select (change)="tableData($event)" class="custom-select">
+                      <option *ngFor="let size of tableSizes" [ngValue]="size">
+                        {{ size }}
+                      </option>
+                    </select>
+                </div>
+                  <div class="pagine">
+                    <pagination-controls responsive="true"  previousLabel="<"
+                    nextLabel=">" (pageChange)="tabSize($event)"></pagination-controls>
+                  </div>
+                    
+            </div>
+          </div>
+    </div>
+  </div>

@@ -1,0 +1,75 @@
+:host /deep/ .ngx-pagination {
+    padding-left: 0px;
+  }
+  
+  :host /deep/.ngx-pagination .current,
+  .btn-info {
+    background: darkslategrey !important;
+    border-radius: 5px;
+    font-family: 'Roboto';
+  }
+  
+  :host /deep/.ngx-pagination .current:hover {
+    border: 1px solid darkslategrey;
+    background:#6B7F7F !important;
+    border-radius: 5px;
+  }
+
+  :host /deep/.ngx-pagination a:hover, .ngx-pagination button:hover {
+    background: #e6e6e6;
+    border-radius: 5px;
+    border: solid 1px  darkslategrey;
+  }
+  :host /deep/ a:not([href]) {
+    color: inherit;
+    text-decoration: none;
+    font-family: 'Roboto';
+}
+.pagination{
+  margin-top: 0px;
+  background: white;
+  width: max-content;
+  margin: auto;
+  padding-left: 4px;
+}
+.pagine{
+  margin: auto;
+  margin-top: 8px;
+}
+
+:host /deep/.ngx-pagination .pagination-previous a::before,
+:host /deep/.ngx-pagination .pagination-previous.disabled::before,
+:host /deep/.ngx-pagination .pagination-next a::after,
+:host /deep/.ngx-pagination .pagination-next.disabled::after { 
+  content: '' !important; 
+}
+.result{
+  margin-top: auto;
+}
+
+.mycard{
+  margin: 8px 36px 8px 36px;
+  border-radius: inherit;
+}
+
+.mat-card{
+  margin:5px;
+}
+
+.content-rendu{
+    box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19); 
+}
+
+.image_prof{
+  width: 120px;
+  height: 75px;
+  border-radius: 70px;
+}
+
+.action{
+  color: darkslategrey;
+  margin-left: 5%;
+}
+.c{
+    background-color: red;
+}
