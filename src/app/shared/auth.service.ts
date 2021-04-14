@@ -32,6 +32,7 @@ export class AuthService {
     var token = localStorage.getItem('access_token');
     var decodedToken = helper.decodeToken(token);
     localStorage.setItem('id', decodedToken.id);
+    localStorage.setItem('roles', decodedToken.roles);
     localStorage.setItem('fullname', decodedToken.fullname);
   }
 
@@ -97,6 +98,4 @@ export class AuthService {
         }
     }
   }
-
-
 }

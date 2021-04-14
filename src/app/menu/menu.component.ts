@@ -7,9 +7,12 @@ import { Router } from '@angular/router';
 })
 export class MenuComponent implements OnInit {
 
+  fullname : String;
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    this.fullname = localStorage.getItem('fullname')
+    
   }
 
   public listAssignment(){
@@ -18,5 +21,10 @@ export class MenuComponent implements OnInit {
 
   public addAssignment(){
     this.router.navigate(["add"]);
+  }
+  logout(){
+    localStorage.removeItem('access_token');
+    localStorage.clear();
+    this.router.navigate(["/"]);
   }
 }

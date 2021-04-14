@@ -1,32 +1,48 @@
 <main class="container">
   <h1>Nouveau assignment</h1>
   <mat-divider></mat-divider>
-  <form class="text-center border border-light p-5" (submit)="onSubmit($event)" [formGroup]="assignmentForm">
-
-    <!-- Name -->
-    <input type="text" formControlName="nom" name="nom" class="form-control mb-4" placeholder="Nom des élèves (*)">
+  <form class="text-center border border-light p-5" (submit)="onSubmit()" [formGroup]="assignmentForm" method="post">
+    <p class="message"
+      *ngIf="assignmentForm.get('nom').dirty && assignmentForm.get('nom').touched && assignmentForm.controls.nom.errors?.required">
+      Nom assignment obligatoire
+    </p>
+    <input type="text" formControlName="nom" id="nom" name="nom" class="form-control mb-4" placeholder="Nom d'assignment (*)"  >
+    <p class="message"
+      *ngIf="assignmentForm.get('auteur').dirty && assignmentForm.get('auteur').touched && assignmentForm.controls.auteur.errors?.required">
+      Nom d'élève obligatoire
+    </p>
+    <input type="text" formControlName="auteur" name="auteur" id="auteur" class="form-control mb-4" placeholder="Nom de l'élèves (*)">
     <div class="form-row mb-4">
       <div class="col">
         <label>Choisissez un matiere <span>(*)</span></label>
-        <select class="browser-default custom-select mb-4" formControlName="idMatiere" name="idMatiere">
+        <select class="browser-default custom-select mb-4" formControlName="idMatiere" name="idMatiere" required>
+          <option></option>
           <option *ngFor="let role of listMatiere" [value]="role.id" class="select_roles">
             {{role.matiere}}
           </option>
         </select>
       </div>
       <div class="col">
+        <p class="message"
+        *ngIf="assignmentForm.get('dateDeRendu').dirty && assignmentForm.get('dateDeRendu').touched && assignmentForm.controls.dateDeRendu.errors?.required">
+        date rendu obligatoire
+       </p>
         <label> Date du rendu </label>
-        <input type="date" formControlName="dateDeRendu" name="dateDeRendu" class="form-control mb-4" placeholder="Nom des élèves">
+        <input type="date" formControlName="dateDeRendu" name="dateDeRendu" id="dateDeRendu" class="form-control mb-4" placeholder="Nom des élèves" required>
       </div>
     </div>
-    <!-- Email -->
     <input type="number" formControlName="note" name="note" class="form-control mb-4" placeholder="note">
-
+    <div class="error_login"
+        *ngIf="assignmentForm.get('note').dirty && assignmentForm.get('note').touched && assignmentForm.controls.note.errors?.minlength && assignmentForm.controls.note.errors?.maxlength">note entre  {{minLength}} - {{maxLength} > characters
+    </div>
     <div class="form-group">
       <textarea class="form-control rounded-0" formControlName="remarque" name="remarque" rows="3" placeholder="Remarque"></textarea>
     </div>
-  
-    <button mat-raised-button color="primary" class="btn">Enregistrer</button>
-  
-  </form>
+    <mat-divider></mat-divider>
+    <div class="group">  
+        <button mat-stroked-button color="primary" class="button" id="button-sign-in" [disabled]="!assignmentForm.valid">
+           Enregistrer
+          </button>
+    </div>
+</form>
 </main>

@@ -13,6 +13,7 @@ import { FormGroup,AbstractControl, Validators,FormBuilder } from '@angular/form
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  
   signUpForm: any;
   title = "Authentification";
   invalid_login = false;

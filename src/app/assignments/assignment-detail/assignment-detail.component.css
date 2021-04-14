@@ -1,9 +1,18 @@
-.container {
-  margin: 30px;
-}
 
 #bottom {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+}
+.title{
+  text-align: center;
+  color: rgb(10, 68, 17);
+  margin-bottom: 2%;
+  margin-top: 2%;
+}
+.image{
+  width: 70px;
+  height: 50px;
+  border-radius: 5px;
+  float: center;
 }

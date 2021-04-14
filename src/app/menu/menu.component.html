@@ -31,8 +31,8 @@
                 </span>
             </button>
               <mat-menu #profil="matMenu">
-                  <span>Randrianomentsoa</span>
-                <button mat-menu-item>
+                  <span>{{fullname}}</span>
+                <button mat-menu-item   (click)= "logout()">
                     <span class="material-icons">
                         logout
                     </span>
