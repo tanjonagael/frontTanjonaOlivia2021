@@ -68,6 +68,10 @@ export class AssignmentsRenduComponent implements OnInit {
     this.limit = event.target.value;
     this.page = 1;
     this.getAssignmentsRendu();
-  }  
+  } 
+  
+  delete(id){
+    
+  }
         
 }

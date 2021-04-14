@@ -54,6 +54,7 @@
 
 .mat-card{
   margin:5px;
+  padding: inherit;
 }
 
 .content-rendu{
@@ -65,9 +66,43 @@
   width: 120px;
   height: 75px;
   border-radius: 70px;
+  float: right;
+}
+.image_matiere{
+  width: 100px;
+  height: 55px;
+  border-radius: 70px;
+  float: right;
+}
+.action{
+  color: gray;
+  margin-left: 5%;
 }
 
-.action{
-  color: darkslategrey;
+.action:hover{
+  color: green;
+}
+.action_delete{
+  color: gray;
   margin-left: 5%;
+  cursor: pointer;
+}
+.action_delete:hover{
+  color: green;
+}
+.title{
+  color:green;
+  margin-top:5px;
+}
+
+.subtitle{
+  margin-top:5px;
+}
+a{ 
+  text-decoration: none;
+}
+a.title:hover{
+  border: solid 1px green;
+  border-radius: 3px;
+  padding: 2px;
 }

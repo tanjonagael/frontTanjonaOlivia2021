@@ -59,13 +59,6 @@ export class AssignmentsComponent implements OnInit {
         this.activeLinkIndex = this.routeLinks.indexOf(this.routeLinks.find(tab => tab.link === '.' + this.router.url));
     });
   }
-  getActiveClass(indexOfRouteLink) {
-    let tabsclass = 'mat-tab-link';
-    if (this.activeLinkIndex === indexOfRouteLink) {
-      tabsclass = 'mat-tab-link mat-tab-label-active';
-    }
-
-    return tabsclass;
-  }
+  
 }
 
