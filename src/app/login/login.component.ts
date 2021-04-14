@@ -81,7 +81,7 @@ export class LoginComponent implements OnInit {
           }
         });
   }
-
+   
   register(){ 
     let newUser = new User();
     newUser.username = this.usernameUp.value;

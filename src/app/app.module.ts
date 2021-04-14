@@ -69,7 +69,7 @@ const routes:Routes = [
   {
     path:"assignment/:id/edit",
     component:EditAssigmentComponent,
-    canActivate : [AuthGuard]
+    //canActivate : [AuthGuard]
   }
   
 ]

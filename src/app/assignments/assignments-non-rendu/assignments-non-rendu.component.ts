@@ -68,5 +68,14 @@ export class AssignmentsNonRenduComponent implements OnInit {
     this.limit = event.target.value;
     this.page = 1;
     this.getAssignmentsNonRenduPagine();
-  }  
+  }
+  
+  onClickEdit(id) {
+    console.log("edit");
+    this.router.navigate(['/assignment', id, 'edit'], {
+      queryParams: {
+      },
+      fragment:"edition"
+    });
+  }
 }

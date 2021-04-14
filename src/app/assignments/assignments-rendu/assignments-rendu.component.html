@@ -27,7 +27,7 @@
                 totalItems: count
               };">
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-9">
                     <mat-card-header>
                         <mat-card-subtitle>
                           <h3 mat-subheader class="subtitle">
@@ -36,26 +36,28 @@
                             </a>
                           </h3>
                         </mat-card-subtitle> 
-                        <mat-card-title>
+                        <mat-card-title class="rendule">
                           Rendu le {{a.dateDeRendu | date}}
                       </mat-card-title>
                     </mat-card-header>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-3">
                     <img src="../assets/mat/{{a.matiere[0].imageProf}}" alt="image_prof" class="image_prof">
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-9">
                     <mat-card-actions>     
                       <a routerLink="/assignment/{{a.id}}">
                         <mat-icon class="action">visibility</mat-icon>
                       </a>
+                      <a (click)="delete(a.id)">
+                        <mat-icon class="action_delete">delete</mat-icon>
+                      </a>
                     </mat-card-actions>
                   </div>
-                  <div class="col-md-6"> <img src="../assets/mat/{{a.matiere[0].imageMatiere}}" alt="image_prof" class="image_matiere"></div>
+                  <div class="col-md-3"> <img src="../assets/mat/{{a.matiere[0].imageMatiere}}" alt="image_prof" class="image_matiere"></div>
                 </div>
-
             </mat-card>
           </div>
     

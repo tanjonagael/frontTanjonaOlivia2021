@@ -19,3 +19,13 @@
 .btn {
   margin-bottom: 2%;
 }
+
+.error_edit{
+  color:red;
+  font-style: italic;
+}
+
+.checkrendu{
+  margin-top: 18px;
+  margin-left: 5px;
+}
