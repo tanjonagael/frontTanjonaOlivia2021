@@ -53,7 +53,7 @@ export class AddAssignmentComponent implements OnInit {
     this.getListMatieres()
   }
 
-  onSubmit() {
+  onSubmit(event) {
     if((!this.nom) || (!this.dateDeRendu) || (!this.idMatiere) || (!this.auteur)) return;
 
     let nouvelAssignment = new Assignment();

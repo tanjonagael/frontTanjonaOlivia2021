@@ -12,3 +12,18 @@
 .add{
   margin-left: 25px;
 }
+.mat-menu-content:not(:empty) {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding: 10px;
+}
+a{
+  text-decoration: none;
+}
+
+.profil{
+  color: blue
+}
+.profil:hover{
+  color: darkslategrey;
+}

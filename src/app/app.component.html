@@ -8,5 +8,10 @@
 -->
 
 <!-- Indique qu'on affichera le composant qui correspond à l'URL courant -->
-<app-menu></app-menu>
+
+<div *ngIf="isLoggedIn">
+  <app-menu></app-menu>
+</div>
+
+
 <router-outlet></router-outlet>

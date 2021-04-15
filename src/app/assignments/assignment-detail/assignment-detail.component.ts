@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DeleteDialogComponent } from 'src/app/delete-dialog/delete-dialog.component';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { AuthService } from 'src/app/shared/auth.service';
 import { Assignment } from '../../shared/assignment.model';
@@ -17,7 +19,7 @@ export class AssignmentDetailComponent implements OnInit {
     private assignmentsService: AssignmentsService,
     private route: ActivatedRoute,
     private router: Router,
-    private authService:AuthService
+    private authService:AuthService,private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -50,28 +52,18 @@ export class AssignmentDetailComponent implements OnInit {
     //this.assignmentTransmis = null;
   }
 
-  onDelete() {
-    this.assignmentsService
-      .deleteAssignment(this.assignmentTransmis)
-      .subscribe((reponse) => {
-        console.log(reponse.message);
-
-        // on cache l'affichage du détail
-        this.assignmentTransmis = null;
-
-        // et on navigue vers la page d'accueil qui affiche la liste
-        this.router.navigate(['/home']);
-      });
-  }
-
-  onClickEdit() {
-    this.router.navigate(['/assignment', this.assignmentTransmis.id, 'edit'], {
-      queryParams: {
-        nom:'Michel Buffa',
-        metier:"Professeur",
-        responsable:"MIAGE"
-      },
-      fragment:"edition"
+ 
+  openDialogDelete(id) {
+    const dialogRef = this.dialog.open(DeleteDialogComponent,{
+      data:{
+        id : id,
+        detail : true,
+        message: 'Voulez vous vraiment supprimer?',
+        buttonText: {
+          ok: 'Oui',
+          cancel: 'Non'
+        }
+      }
     });
   }
 

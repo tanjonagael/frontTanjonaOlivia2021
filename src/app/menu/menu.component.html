@@ -1,4 +1,4 @@
-<div class="container">
+<div  class="container">
     <p>
         <mat-toolbar>
             <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
@@ -31,13 +31,17 @@
                 </span>
             </button>
               <mat-menu #profil="matMenu">
-                  <span>{{fullname}}</span>
-                <button mat-menu-item   (click)= "logout()">
-                    <span class="material-icons">
-                        logout
-                    </span>
-                    <span>Logout</span>
-                </button>
+                
+                    <button mat-menu-item   (click)= "openProfil()">
+                     <span class="profil">{{fullname}}</span>
+                    </button>
+                        
+                    <button mat-menu-item   (click)= "logout()">
+                        <span class="material-icons">
+                            logout
+                        </span>
+                        <span>Logout</span>
+                    </button>
               </mat-menu>
         </mat-toolbar>
       </p>    

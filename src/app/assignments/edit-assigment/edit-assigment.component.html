@@ -1,57 +1,74 @@
 <main class="container">
-  <h1>Modification de l'assignment</h1>
-  <mat-divider></mat-divider>
-  <form ngForm  class="form" (submit)="onSubmit(assignmentForm.value)" [formGroup]="assignmentForm">
-    <input class="inputfield" type="text" placeholder="Nom d' élève *" name="nom" formControlName="nom"/>
-    <div class="error_edit"
-        *ngIf="assignmentForm.get('nom').dirty && assignmentForm.get('nom').touched && assignmentForm.controls.nom.errors?.required">Nom
-        obligatoire
-    </div>
-    <br>
-    <mat-form-field appearance="fill" class="field">
-      <mat-label>Choisissez une date</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="dateDeRendu" name="dateDeRendu">
+  <div class="content_list">
+    <h1 class="titre_list"><mat-icon>edit</mat-icon>Edit assignment</h1>
+      <form ngForm  class="form" (submit)="onSubmit(assignmentForm.value)" [formGroup]="assignmentForm">
+        <div style="display: flex;">
+          <label class="labelEdit">Auteur *</label>
+          <input class="inputfield" type="text" placeholder="Nom d' élève *" name="auteur" formControlName="auteur"/>
+        </div>
+        
+        <div class="error_edit"
+            *ngIf="assignmentForm.get('auteur').dirty && assignmentForm.get('auteur').touched && assignmentForm.controls.auteur.errors?.required">Auteur
+            required
+        </div>
+        <div style="display: flex;">
+          <label class="labelEdit">Nom *</label>
+          <input class="inputfield" type="text" placeholder="Titre d'assignment *" name="nom" formControlName="nom"/>
+        </div>
+        <div class="error_edit"
+            *ngIf="assignmentForm.get('nom').dirty && assignmentForm.get('nom').touched && assignmentForm.controls.nom.errors?.required">Titre d'assignment
+            required
+        </div>
+        <br>
+        <mat-form-field appearance="fill" class="field">
+          <mat-label>Choisissez une date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="dateDeRendu" name="dateDeRendu">
 
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
 
-      <mat-datepicker #picker></mat-datepicker>
-     
-    </mat-form-field>
-    <div class="error_edit"
-        *ngIf="assignmentForm.get('dateDeRendu').dirty && assignmentForm.get('dateDeRendu').touched && assignmentForm.controls.dateDeRendu.errors?.required">Date rendu obligatoire 
-    </div>
-    <br>
-    <mat-form-field appearance="fill" class="field">
-      <mat-label>Choisissez un matière</mat-label>
+          <mat-datepicker #picker></mat-datepicker>
+        
+        </mat-form-field>
+        <div class="error_edit"
+            *ngIf="assignmentForm.get('dateDeRendu').dirty && assignmentForm.get('dateDeRendu').touched && assignmentForm.controls.dateDeRendu.errors?.required">Date rendu obligatoire 
+        </div>
+        <br>
+        <mat-form-field appearance="fill" class="field">
+          <mat-label>Choisissez un matière</mat-label>
+          
+          <select matNativeControl formControlName="idMatiere" name="idMatiere">
+              <option *ngFor="let mat of listMatiere" [value]="mat.id" class="select_roles" [selected]="mat.id === idMatiereVal">
+                {{mat.matiere}}
+              </option>
+          </select>
+        </mat-form-field>
+        <div class="error_edit"
+            *ngIf="assignmentForm.get('idMatiere').dirty && assignmentForm.get('idMatiere').touched && assignmentForm.controls.idMatiere.errors?.required">Matière obligatoire 
+          </div>
+          <div style="display: flex;">
+            <label class="labelEdit">Note *</label>
+            <input class="inputfield" type="number" formControlName="note" placeholder="Note" name="note">
+          </div>
+        <div class="error_edit"
+          *ngIf="assignmentForm.get('note').dirty && assignmentForm.get('note').touched && assignmentForm.controls.note.errors?.min">Note obligatoire  
+        </div>
+        <div class="error_edit"
+          *ngIf="assignmentForm.get('note').dirty && assignmentForm.get('note').touched && assignmentForm.controls.note.errors?.min">Note minimum 0  
+        </div>
+        <div class="error_edit"
+          *ngIf="assignmentForm.get('note').dirty && assignmentForm.get('note').touched && assignmentForm.controls.note.errors?.max">Note maximum 20 
+        </div>
+        <div class="checkrendu">
+          <mat-checkbox *ngIf="assignmentForm.valid" [checked]="true" [disabled]="true">
+            Rendu
+        </mat-checkbox>
+        </div>
+            <mat-form-field class="field">
+          <mat-label>Remarque</mat-label>
+          <textarea matInput formControlName="remarque" name="remarque"></textarea>
+        </mat-form-field>
+        <button mat-raised-button color="primary" class="btn" [disabled]="!assignmentForm.valid">Enregistrer</button>
+      </form>
+  </div>
       
-      <select matNativeControl formControlName="idMatiere" name="idMatiere">
-          <option *ngFor="let mat of listMatiere" [value]="mat.id" class="select_roles" [selected]="mat.id === idMatiereVal">
-            {{mat.matiere}}
-          </option>
-      </select>
-    </mat-form-field>
-    <div class="error_edit"
-        *ngIf="assignmentForm.get('idMatiere').dirty && assignmentForm.get('idMatiere').touched && assignmentForm.controls.idMatiere.errors?.required">Matière obligatoire 
-      </div>
-    <input class="inputfield" type="number" formControlName="note" placeholder="Note" name="note">
-    <div class="error_edit"
-      *ngIf="assignmentForm.get('note').dirty && assignmentForm.get('note').touched && assignmentForm.controls.note.errors?.min">Note obligatoire  
-    </div>
-    <div class="error_edit"
-      *ngIf="assignmentForm.get('note').dirty && assignmentForm.get('note').touched && assignmentForm.controls.note.errors?.min">Note minimum 0  
-    </div>
-    <div class="error_edit"
-      *ngIf="assignmentForm.get('note').dirty && assignmentForm.get('note').touched && assignmentForm.controls.note.errors?.max">Note maximum 20 
-    </div>
-    <div class="checkrendu">
-      <mat-checkbox *ngIf="assignmentForm.valid" [checked]="true" [disabled]="true">
-        Rendu
-     </mat-checkbox>
-    </div>
-        <mat-form-field class="field">
-      <mat-label>Remarque</mat-label>
-      <textarea matInput formControlName="remarque" name="remarque"></textarea>
-    </mat-form-field>
-    <button mat-raised-button color="primary" class="btn" [disabled]="!assignmentForm.valid">Enregistrer</button>
-  </form>
 </main>

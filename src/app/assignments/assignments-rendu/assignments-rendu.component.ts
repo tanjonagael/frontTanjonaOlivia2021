@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DeleteDialogComponent } from 'src/app/delete-dialog/delete-dialog.component';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { AuthService } from 'src/app/shared/auth.service';
 import { Assignment } from '../../shared/assignment.model';
@@ -12,7 +14,7 @@ import { Assignment } from '../../shared/assignment.model';
 export class AssignmentsRenduComponent implements OnInit {
 
   assignmentsRendu:Assignment[];
-
+  
   page: number=1;
   limit: number = 20;
   totalDocs: number;
@@ -27,7 +29,7 @@ export class AssignmentsRenduComponent implements OnInit {
   
   constructor(private assignmentsService:AssignmentsService,
     private route:ActivatedRoute,
-    private router:Router, private auth : AuthService) {}
+    private router:Router, private auth : AuthService,private dialog: MatDialog) {}
 
     ngOnInit() {
    
@@ -69,9 +71,17 @@ export class AssignmentsRenduComponent implements OnInit {
     this.page = 1;
     this.getAssignmentsRendu();
   } 
-  
-  delete(id){
-    
-  }
-        
+
+  openDialogDelete(id) {
+    const dialogRef = this.dialog.open(DeleteDialogComponent,{
+      data:{
+        id : id,
+        message: 'Voulez vous vraiment supprimer?',
+        buttonText: {
+          ok: 'Oui',
+          cancel: 'Non'
+        }
+      }
+    });
+  }     
 }

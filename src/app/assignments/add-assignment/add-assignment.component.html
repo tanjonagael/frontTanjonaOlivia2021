@@ -1,24 +1,21 @@
 <main class="container">
-  <h1>Nouveau assignment</h1>
-  <mat-divider></mat-divider>
-<<<<<<< HEAD
+    <div class="content_list">
+      <h1 class="titre_list"><mat-icon>add</mat-icon>Add  assignment</h1>
+  
   <form class="text-center border border-light p-5" (submit)="onSubmit($event)" [formGroup]="assignmentForm">
 
     <!-- Name -->
     <input type="text" formControlName="nom" name="nom" class="form-control mb-4" placeholder="Nom d' élève (*)">
-=======
-  <form class="text-center border border-light p-5" (submit)="onSubmit()" [formGroup]="assignmentForm" method="post">
     <p class="message"
       *ngIf="assignmentForm.get('nom').dirty && assignmentForm.get('nom').touched && assignmentForm.controls.nom.errors?.required">
-      Nom assignment obligatoire
+      Nom  d'élève obligatoire
     </p>
     <input type="text" formControlName="nom" id="nom" name="nom" class="form-control mb-4" placeholder="Nom d'assignment (*)"  >
     <p class="message"
       *ngIf="assignmentForm.get('auteur').dirty && assignmentForm.get('auteur').touched && assignmentForm.controls.auteur.errors?.required">
-      Nom d'élève obligatoire
+      Nom  assignment obligatoire
     </p>
-    <input type="text" formControlName="auteur" name="auteur" id="auteur" class="form-control mb-4" placeholder="Nom de l'élèves (*)">
->>>>>>> df56b396792826e2bd0d68e9b42f5756bd0e2d73
+    
     <div class="form-row mb-4">
       <div class="col">
         <label>Choisissez un matiere <span>(*)</span></label>
@@ -40,7 +37,7 @@
     </div>
     <input type="number" formControlName="note" name="note" class="form-control mb-4" placeholder="note">
     <div class="error_login"
-        *ngIf="assignmentForm.get('note').dirty && assignmentForm.get('note').touched && assignmentForm.controls.note.errors?.minlength && assignmentForm.controls.note.errors?.maxlength">note entre  {{minLength}} - {{maxLength} > characters
+        *ngIf="assignmentForm.get('note').dirty && assignmentForm.get('note').touched && assignmentForm.controls.note.errors?.minlength && assignmentForm.controls.note.errors?.maxlength">Note entre  {{minLength}} à {{maxLength}}
     </div>
     <div class="form-group">
       <textarea class="form-control rounded-0" formControlName="remarque" name="remarque" rows="3" placeholder="Remarque"></textarea>
@@ -52,4 +49,5 @@
           </button>
     </div>
 </form>
+</div>
 </main>

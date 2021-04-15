@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DeleteDialogComponent } from 'src/app/delete-dialog/delete-dialog.component';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { AuthService } from 'src/app/shared/auth.service';
 import { Assignment } from '../../shared/assignment.model';
@@ -23,11 +25,11 @@ export class AssignmentsNonRenduComponent implements OnInit {
   nextPage: number;
   count:number = 0;
   tableSizes = [20, 25, 30, 40];
-  
-  
+  admin=1;
+  role_user:number;
   constructor(private assignmentsService:AssignmentsService,
     private route:ActivatedRoute,
-    private router:Router, private auth : AuthService) {}
+    private router:Router, private auth : AuthService,private dialog: MatDialog) {}
 
     ngOnInit() {
    
@@ -38,7 +40,7 @@ export class AssignmentsNonRenduComponent implements OnInit {
         this.limit = +queryParams.limit || 20;
     });
     this.getAssignmentsNonRenduPagine();
-   
+    this.role_user = parseInt(localStorage.getItem("roles"));
     }
 
     getAssignmentsNonRenduPagine() {
@@ -76,6 +78,19 @@ export class AssignmentsNonRenduComponent implements OnInit {
       queryParams: {
       },
       fragment:"edition"
+    });
+  }
+
+  openDialogDelete(id) {
+    const dialogRef = this.dialog.open(DeleteDialogComponent,{
+      data:{
+        id : id,
+        message: 'Voulez vous vraiment supprimer?',
+        buttonText: {
+          ok: 'Oui',
+          cancel: 'Non'
+        }
+      }
     });
   }
 }

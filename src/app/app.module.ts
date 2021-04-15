@@ -35,7 +35,9 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { AssignmentsRenduComponent } from './assignments/assignments-rendu/assignments-rendu.component';
 import { AssignmentsNonRenduComponent } from './assignments/assignments-non-rendu/assignments-non-rendu.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
+import {MatDialogModule } from '@angular/material/dialog';
+import { ProfilDialogComponent } from './profil-dialog/profil-dialog.component';
 const routes:Routes = [
   { path: '', component: LoginComponent },
   { path: 'home', component: AssignmentsComponent, children: [
@@ -69,7 +71,7 @@ const routes:Routes = [
   {
     path:"assignment/:id/edit",
     component:EditAssigmentComponent,
-    //canActivate : [AuthGuard]
+    canActivate : [AuthGuard]
   }
   
 ]
@@ -85,7 +87,9 @@ const routes:Routes = [
     MenuComponent,
     AssignmentsComponent,
     AssignmentsRenduComponent,
-    AssignmentsNonRenduComponent
+    AssignmentsNonRenduComponent,
+    DeleteDialogComponent,
+    ProfilDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -97,7 +101,7 @@ const routes:Routes = [
     MatSlideToggleModule,
     RouterModule.forRoot(routes), HttpClientModule,
     MatSelectModule ,ReactiveFormsModule, MatToolbarModule,
-    MatMenuModule,MatTabsModule,NgxPaginationModule,MatCardModule
+    MatMenuModule,MatTabsModule,NgxPaginationModule,MatCardModule,MatDialogModule
     /*JwtModule.forRoot({
       config: {
         tokenGetter: function  tokenGetter() {

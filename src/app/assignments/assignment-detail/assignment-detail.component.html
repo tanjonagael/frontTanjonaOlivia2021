@@ -1,38 +1,36 @@
 <div class="container" *ngIf="assignmentTransmis">
+    <div class="content_list">
+      <h1 class="titre_list">
+        <mat-icon>visibility</mat-icon> Assignment : {{assignmentTransmis.nom}}
+      </h1>
   
-  <h2 class ="title">Assignment : {{assignmentTransmis.nom}}</h2>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Elève</th>
-        <th scope="col">matiere</th>
-        <th scope="col">Note</th>
-        <th scope="col">Date d rendu</th>
-        <th scope="col">Prof</th>
-        <th scope="col">Remarque</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th>{{assignmentTransmis.auteur}}</th>
-        <td>{{assignmentTransmis.matiere[0].matiere}}
-          <span><img src="../assets/mat/{{assignmentTransmis.matiere[0].imageMatiere}}" alt="image_prof" class="image"></span>
-        </td>
-        <td>{{assignmentTransmis.note}} / 20</td>
-        <td>{{assignmentTransmis.dateDeRendu | date}}</td>
-        <td class="text-align-center"><img src="../assets/mat/{{assignmentTransmis.matiere[0].imageProf}}" alt="image_prof" class="image"></td>
-        <td>{{assignmentTransmis.remarque}}</td>
-      </tr>
-      
-    </tbody>
-  </table>
-    <div id="bottom">
-      <nav *ngIf="roles===1">
-          <button mat-stroked-button color="primary" (click)="onClickEdit()">EDIT</button>
-      </nav>
-      <nav *ngIf="roles===2">
-        <button [disabled] mat-stroked-button color="primary" (click)="onClickEdit()">EDIT</button>
-    </nav>
-      <button mat-stroked-button color="warn" (click)="onDelete()">DELETE</button>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Elève</th>
+            <th scope="col">Matiere</th>
+            <th scope="col">Note</th>
+            <th scope="col">Date  rendu</th>
+            <th scope="col">Prof</th>
+            <th scope="col">Remarque</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{assignmentTransmis.auteur}}</td>
+            <td>{{assignmentTransmis.matiere[0].matiere}}
+              <span><img src="../assets/mat/{{assignmentTransmis.matiere[0].imageMatiere}}" alt="image_prof" class="image"></span>
+            </td>
+            <td>{{assignmentTransmis.note}} / 20</td>
+            <td>{{assignmentTransmis.dateDeRendu | date}}</td>
+            <td class="text-align-center"><img src="../assets/mat/{{assignmentTransmis.matiere[0].imageProf}}" alt="image_prof" class="image"></td>
+            <td>{{assignmentTransmis.remarque}}</td>
+          </tr>
+          
+        </tbody>
+      </table>
+      <div id="bottom">
+        <button type="button" class="btn btn-raised btn-danger" (click)="openDialogDelete(assignmentTransmis.id)">Delete</button>
+      </div>
     </div>
 </div>

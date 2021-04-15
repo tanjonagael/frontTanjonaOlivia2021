@@ -26,7 +26,12 @@ export class AuthGuard implements CanActivate {
     //return true;
     // on n'autorisera l'activation de la route associée que si on est
     // bien un admin
-    return this.authService.isAdmin().then((admin) => {
+    if(this.authService.isAdmin()) return true;
+    else {
+      this.router.navigate(['/home']);
+      return false;
+    }
+    /*return this.authService.isAdmin().then((admin) => {
       if (admin) {
         console.log("GUARD : vous êtes admin, autorisation accordée")
         return true;
@@ -36,6 +41,6 @@ export class AuthGuard implements CanActivate {
         this.router.navigate(['/home']);
         return false;
       }
-    });
+    });*/
   }
 }

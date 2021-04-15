@@ -3,6 +3,8 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  margin-left: 90%;
+  
 }
 .title{
   text-align: center;
@@ -15,4 +17,19 @@
   height: 50px;
   border-radius: 5px;
   float: center;
+}
+.titre_list{
+  text-align: center;
+  font-style: italic;
+  font-weight: 800;
+  color: darkslategrey;
+}
+.content_list{
+  border: solid 2px darkslategrey;
+    padding: 2px 2px 2px 2px;
+    border-radius: 4px;
+}
+
+td{
+  font-weight: bold;
 }

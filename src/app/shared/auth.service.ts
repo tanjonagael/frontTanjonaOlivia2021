@@ -7,20 +7,25 @@ var helper = new JwtHelperService();
 
 import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
+/*import { resolve } from 'path';
+import { rejects } from 'assert';*/
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  admin = false;
+  admin = 1;//role super user
+  non_admin = 2;//role user
   
   constructor(private http : HttpClient, private router: Router) {}
-  uriSignIn = "http://localhost:8010/api/user/signIn";
+  /*uriSignIn = "http://localhost:8010/api/user/signIn";
   uriSignUp = "http://localhost:8010/api/user/signUp";
   uriRoles = "http://localhost:8010/api/roles";
-  // uriSignIn = "https://backtanjonaolivia2021.herokuapp.com/api/user/signIn";
-  // uriSignUp = "https://backtanjonaolivia2021.herokuapp.com/api/user/signUp";
-  // uriRoles = "https://backtanjonaolivia2021.herokuapp.com/api/roles";
+  uriUser = "http://localhost:8010/api/user";*/
+   uriSignIn = "https://backtanjonaolivia2021.herokuapp.com/api/user/signIn";
+  uriSignUp = "https://backtanjonaolivia2021.herokuapp.com/api/user/signUp";
+  uriRoles = "https://backtanjonaolivia2021.herokuapp.com/api/roles";
+  uriUser = "https://backtanjonaolivia2021.herokuapp.com/api/user";
 
   //appel api
   logIn(user: User): Observable<any> {
@@ -34,6 +39,7 @@ export class AuthService {
     localStorage.setItem('id', decodedToken.id);
     localStorage.setItem('roles', decodedToken.roles);
     localStorage.setItem('fullname', decodedToken.fullname);
+    localStorage.setItem('username', decodedToken.username);
   }
 
   //test expiration token
@@ -47,22 +53,30 @@ export class AuthService {
   redirectHome(reponse){
       localStorage.setItem('access_token', reponse.token);
       this.setInfoUserByToken()
-      this.router.navigate(["/home"]);
+      this.router.navigate(["/home"])
+      .then(() => {
+        window.location.reload();
+      });
   }
 
 
   logOut() {
     localStorage.removeItem('access_token');
     localStorage.removeItem('fullname');
-    this.router.navigate(["/login"]);
+    localStorage.removeItem('username');
+    localStorage.removeItem('roles');
+    this.router.navigate(["/login"])
+    .then(() => {
+      window.location.reload();
+    });
   }
 
   // exemple d'utilisation :
   // isAdmin.then(admin => { console.log("administrateur : " + admin);})
   isAdmin() {
-    return new Promise((resolve, reject) => {
-      resolve(this.admin);
-    });
+    
+    if(parseInt(localStorage.getItem("roles")) == this.admin) return true;
+    else return false;
   }
 
   //list roles
@@ -97,5 +111,12 @@ export class AuthService {
             matchingControl.setErrors(null);
         }
     }
+  }
+  getUser(username:String):Observable<User> {
+    //let assignementCherche = this.assignments.find(a => a.id === id);
+
+    //return of(assignementCherche);
+
+    return this.http.get<User>(this.uriUser + "/" + username);
   }
 }

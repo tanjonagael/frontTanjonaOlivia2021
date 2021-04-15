@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ProfilDialogComponent } from '../profil-dialog/profil-dialog.component';
+import { AuthService } from '../shared/auth.service';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -8,23 +11,38 @@ import { Router } from '@angular/router';
 export class MenuComponent implements OnInit {
 
   fullname : String;
-  constructor(private router: Router) { }
+  isLoggin = false;
+  constructor(private router: Router,private auth: AuthService,public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.fullname = localStorage.getItem('fullname')
+    this.fullname = localStorage.getItem('fullname');
+   
+    /*if(localStorage.getItem('access_token') != null) this.isLoggin = true;
+    else this.isLoggin = false;*/
     
   }
 
   public listAssignment(){
-    this.router.navigate(["home"]);
+    this.router.navigate(["/home"])
+    .then(() => {
+      window.location.reload();
+    });
   }
 
   public addAssignment(){
-    this.router.navigate(["add"]);
+    this.router.navigate(["/add"]).then(() => {
+      window.location.reload();
+    });
   }
   logout(){
-    localStorage.removeItem('access_token');
-    localStorage.clear();
-    this.router.navigate(["/"]);
+    this.auth.logOut();
+  }
+
+  openProfil() {
+    this.dialog.open(ProfilDialogComponent, {
+      data: {
+        
+      }
+    });
   }
 }

@@ -16,67 +16,54 @@
             </div>            
         </div>
       </div>
-    
-          <!--<nav>
-            <a routerLink="/assignment/{{a.id}}">-->
-                <div class="container">
-                    
-                        <div class="mycard">
-                            <mat-list *ngFor="let a of assignmentsRendu | paginate : {
-                                itemsPerPage: limit,
-                                currentPage: page,
-                                totalItems: count
-                              };">
-                              <div class="row">
-                                <div class="col-lg-9">
-                                    <nav>
-                                      <a routerLink="/assignment/{{a.id}}">
-                                        <h3 mat-subheader>{{a.dateDeRendu | date}}</h3>
-                                        <mat-list-item>
-                                          <p *ngIf="a.rendu; else nonsoumis" appRendu>
-                                            {{a.nom}}, rendu par l'élève.
-                                          </p>
-                                            <ng-template #nonsoumis>
-                                                <p appNonRendu>
-                                                    {{a.nom}}, non encore rendu par l'élève.
-                                                </p>
-                                                </ng-template>
-                                            <ng-template #nonsoumis>
-                                                <p appNonRendu>
-                                                    {{a.nom}}, non encore rendu par l'élève.
-                                                </p>
-                                                </ng-template>
-                                        </mat-list-item>
-                                      </a>
-                                    </nav>  
-                                </div>
-                                <div class="col col-lg-4">
-                                    <button mat-raised-button color="primary" (click)="onClickEdit(a.id)">
-                                        Edit
-                                      </button>
-                                  </div>
-                              </div>
-                              
-                            </mat-list>
-                            <mat-divider></mat-divider>
-                        </div>
-                </div>
-          <div class="pagination">
-            <div class="d-flex justify-content-center">
-              <p class="result">Résultats par page</p>
-                <div class="p-2 bd-highlight">
-                    <select (change)="tableData($event)" class="custom-select">
-                      <option *ngFor="let size of tableSizes" [ngValue]="size">
-                        {{ size }}
-                      </option>
-                    </select>
-                </div>
-                  <div class="pagine">
-                    <pagination-controls responsive="true"  previousLabel="<"
-                    nextLabel=">" (pageChange)="tabSize($event)"></pagination-controls>
+      <div class="mycard">
+        <mat-divider></mat-divider>
+        <div *ngFor="let a of assignmentsRendu | paginate : {
+            itemsPerPage: limit,
+            currentPage: page,
+            totalItems: count
+          };">
+                  <div class="row">
+                    <div class="col-md-5">
+                        <h5>Auteur : {{a.auteur}}</h5>
+                    </div>
+                    <div class="col-md-5">
+                      <h5>Titre : {{a.nom}}</h5>
+                    </div>
+                    <div class="col-md-2">
+                      <h5>Matière : {{a.matiere[0].matiere}}</h5>
+                    </div>
                   </div>
-                    
-            </div>
+                  <div class="row">
+                    <div class="col-md-6 edit">
+                      <button type="button" class="btn btn-raised btn-primary" (click)="onClickEdit(a.id)" [disabled]="role_user !== admin">Edit</button>
+                     
+                    </div>
+                    <div class="col-md-4">
+                      <button type="button" class="btn btn-raised btn-danger" (click)="openDialogDelete(a.id)">Delete</button>
+                    </div>
+                    </div>
+                  <mat-divider></mat-divider>
           </div>
+      </div>
+        <mat-divider></mat-divider>
+    </div>
+               
+    <div class="pagination">
+      <div class="d-flex justify-content-center">
+        <p class="result">Résultats par page</p>
+          <div class="p-2 bd-highlight">
+              <select (change)="tableData($event)" class="custom-select">
+                <option *ngFor="let size of tableSizes" [ngValue]="size">
+                  {{ size }}
+                </option>
+              </select>
+          </div>
+            <div class="pagine">
+              <pagination-controls responsive="true"  previousLabel="<"
+              nextLabel=">" (pageChange)="tabSize($event)"></pagination-controls>
+            </div>
+              
+      </div>
     </div>
   </div>

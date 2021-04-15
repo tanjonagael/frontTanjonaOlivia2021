@@ -16,6 +16,7 @@ export class EditAssigmentComponent implements OnInit {
 
   assignmentForm: FormGroup;
   nom : AbstractControl;
+  auteur : AbstractControl;
   dateDeRendu : AbstractControl;
   note : AbstractControl;
   idMatiere : AbstractControl;
@@ -30,6 +31,7 @@ export class EditAssigmentComponent implements OnInit {
    
     this.assignmentForm = this.formBuilder.group({
       nom :['',Validators.required],
+      auteur :['',Validators.required],
       dateDeRendu: ['',[Validators.required]],
       note :['',[Validators.required,Validators.min(0),Validators.max(20)]],
       idMatiere: ['',[Validators.required]],
@@ -37,6 +39,7 @@ export class EditAssigmentComponent implements OnInit {
     });
 
     this.nom = this.assignmentForm.controls['nom'];
+    this.auteur = this.assignmentForm.controls['auteur'];
     this.dateDeRendu = this.assignmentForm.controls['dateDeRendu'];
     this.note = this.assignmentForm.controls['note'];
     this.idMatiere = this.assignmentForm.controls['idMatiere'];
@@ -62,6 +65,7 @@ export class EditAssigmentComponent implements OnInit {
     this.assignmentsService.getAssignment(id).subscribe((assignment) => {
       this.assignment = assignment;
       this.assignmentForm.controls['nom'].setValue(assignment.nom);
+      this.assignmentForm.controls['auteur'].setValue(assignment.auteur);
       this.assignmentForm.controls['dateDeRendu'].setValue(assignment.dateDeRendu);
       this.assignmentForm.controls['idMatiere'].setValue(assignment.idMatiere);
       if(this.assignment.rendu){
@@ -89,8 +93,7 @@ export class EditAssigmentComponent implements OnInit {
 
   getListMatieres(){
     this.matiereService.listMatieres().subscribe(reponse =>{
-      this.listMatiere = reponse
-      console.log(this.listMatiere)
+      this.listMatiere = reponse;
     });
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AssignmentsService } from './shared/assignments.service';
 import { AuthService } from './shared/auth.service';
@@ -8,31 +8,18 @@ import { AuthService } from './shared/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'Application de gestion des assignments';
-
-  constructor(private authService:AuthService, private router:Router,
-              private assignmentsService:AssignmentsService) {}
-
-  login() {
-    // si je suis pas loggé, je me loggue, sinon, si je suis
-    // loggé je me déloggue et j'affiche la page d'accueil
-
-   /* if(this.authService.loggedIn) {
-      // je suis loggé
-      // et bien on se déloggue
-      this.authService.logOut();
-      // on navigue vers la page d'accueil
-      this.router.navigate(["/login"]);
-      console.log("deconnécté")
-    } else {
-      // je ne suis pas loggé, je me loggue
-      this.authService.logIn("admin", "toto")
-      this.router.navigate(["/home"]);
-      console.log("connécté")
-    }*/
+  isLoggedIn = false;
+  constructor(private auth:AuthService, private router:Router,private assignmentsService:AssignmentsService) {
+    
+  }
+  ngOnInit(): void {
+    if(localStorage.getItem('access_token') != null) this.isLoggedIn = true;
+    else this.isLoggedIn = false;
   }
 
+  
   peuplerBD() {
     // version naive et simple
     //this.assignmentsService.peuplerBD();

@@ -16,7 +16,7 @@ export class AssignmentsComponent implements OnInit {
   userConnecte: String;
   activeLink  = "rendu";
   routeLinks: any[];
-    activeLinkIndex = -1;
+  activeLinkIndex = -1;
   // on injecte le service de gestion des assignments
   constructor(private assignmentsService:AssignmentsService,
               private route:ActivatedRoute,
@@ -25,11 +25,11 @@ export class AssignmentsComponent implements OnInit {
   ngOnInit() {
     
    // console.log(this.auth.isExpiredToken);
-    /*if(this.auth.isExpiredToken || this.auth.loggedIn == null) {
+    if(this.auth.isExpiredToken || this.auth.loggedIn == null) {
       this.auth.logOut();
-    }*/
+    }
       
-   this.tabs = [
+    this.tabs = [
     {
       label: 'Rendu',
       icon: 'done_outline',
@@ -41,23 +41,13 @@ export class AssignmentsComponent implements OnInit {
       route: 'non_rendu',
     }
   ];
-  this.routeLinks = [
-    {
-        label: 'Product 1',
-        link: './rendu',
-        index: 0
-    }, {
-        label: 'Product 2',
-        link: './non_rendu',
-        index: 1
-    }
-  ];
+  
      // console.log("getAssignments() du service appelé");
       //this.userConnecte = this.auth.userConnecte;
       this.userConnecte = localStorage.getItem("fullname");
-      this.router.events.subscribe((res) => {
-        this.activeLinkIndex = this.routeLinks.indexOf(this.routeLinks.find(tab => tab.link === '.' + this.router.url));
-    });
+      if(this.router.url.includes("non_rendu")) this.activeLink = "non_rendu";
+      else this.activeLink  = "rendu";
+     // console.log(+"  "+this.router.url);
   }
   
 }
