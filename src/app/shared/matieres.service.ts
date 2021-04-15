@@ -11,7 +11,8 @@ import { Router } from '@angular/router';
 export class MatiereService {
   
   constructor(private http : HttpClient, private router: Router) {}
-  uriMatiere = "http://localhost:8010/api/matieres";
+  //uriMatiere = "http://localhost:8010/api/matieres";
+  uriMatiere = "https://backtanjonaolivia2021.herokuapp.com/api/matieres";
 
   //list roles
   listMatieres(): Observable<any> {
