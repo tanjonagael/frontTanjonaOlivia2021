@@ -34,10 +34,10 @@ export class AddAssignmentComponent implements OnInit {
 
   constructor(private assignmentsService:AssignmentsService,private router:Router,private matiereService:MatiereService,private formBuilder: FormBuilder) {
     this.assignmentForm = this.formBuilder.group({
-      nom :['', Validators.required],
-      auteur :['', Validators.required],
+      nom :['', [Validators.required]],
+      auteur :['', [Validators.required]],
       dateDeRendu: ['', [Validators.required]],
-      note :['',[Validators.maxLength(this.maxLength),Validators.minLength(this.minLength)]],
+      note :['',[Validators.max(this.maxLength),Validators.min(this.minLength)]],
       idMatiere: ['', [Validators.required]],
       remarque: ['']
     });
@@ -61,7 +61,7 @@ export class AddAssignmentComponent implements OnInit {
     nouvelAssignment.dateDeRendu = this.assignmentForm.value.dateDeRendu;
     nouvelAssignment.idMatiere = this.assignmentForm.value.idMatiere;
     nouvelAssignment.auteur = this.assignmentForm.value.auteur;
-    if( this.note.value==""){
+    if( this.note.value == ""){
       nouvelAssignment.note = null;
       nouvelAssignment.rendu = false;
       nouvelAssignment.remarque = ' ';

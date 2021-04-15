@@ -66,7 +66,7 @@ export class EditAssigmentComponent implements OnInit {
       this.assignment = assignment;
       this.assignmentForm.controls['nom'].setValue(assignment.nom);
       this.assignmentForm.controls['auteur'].setValue(assignment.auteur);
-      this.assignmentForm.controls['dateDeRendu'].setValue(assignment.dateDeRendu);
+     
       this.assignmentForm.controls['idMatiere'].setValue(assignment.idMatiere);
       if(this.assignment.rendu){
         this.assignmentForm.controls['note'].setValue(assignment.note);
